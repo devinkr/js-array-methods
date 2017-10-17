@@ -1,9 +1,9 @@
-# Higher Order Functions
+# Higher-Order Functions
 
 ## Learning Objectives
 
-- Define a higher order function (in terms of what input/output these functions can take)
-- Use higher order functions to iterate over lists
+- Define higher-order functions
+- Use higher-order functions to iterate over arrays
 - Describe the uses of `forEach`, `map`, `filter`, and `reduce`
 - Define `every` and `some`
 - Describe a closure
@@ -11,10 +11,10 @@
 ## Review
 
 ### What is a function? (10 minutes / 00:10)
-- Defined chunk of code that can be called by later code
+- Defined block of code that can be called by later code
 - Functions are defined with zero or more **parameters**
-  - **Parameters** are special variables available in the body of the function with values assigned by the code calling the function.
-  - The values provided by the calling code are called the **arguments** to the function.
+  - **Parameters** are the variables within a function that refer to its inputs
+  - **Arguments** are the values passed in to the function when it is called
 
 ```js
 function sum (a, b) { // function "sum" defined with parameters a and b
@@ -27,7 +27,7 @@ sum(3, 4) // function "sum" called with arguments a and b
 
 - Functions always return a value
   - Either explicitly using a **return** statement
-  - Or, implicitly returning `undefined`
+  - Or, implicitly by returning `undefined`
 
 ```js
 // in a repl
@@ -37,32 +37,29 @@ console.log('hello!')
 ```
 
 ### Functions are regular values (5 minutes / 00:15)
-- Functions are values just like numbers, strings, booleans, arrays, objects, `undefined`, and `null`.
-- Functions can be assigned to variables and put into arrays and objects.
-- Most importantly, functions can be given to and returned from functions.
+- Functions are values just like numbers, strings, booleans, arrays, objects, `undefined`, and `null`
+- Functions can be assigned to variables and put into arrays and objects
+- Most importantly, functions can be given to other functions as arguments and/or returned from functions as output
 
 ### JavaScript Collections (5 minutes / 00:20)
 
-Numbers, Strings, and Booleans are our basic building block of data but on their own, they don't express much.
+Numbers, Strings, and Booleans are our basic building block of data but on their own, they don't express much. We use collections, most commonly Objects and Arrays to build up data to describe more complex entities.
 
-We use collections, most commonly Objects and Arrays to build up data to describe interesting things.
-
-**Arrays** hold their elements in sequence and is generally used to store collections of like things.
+**Arrays** hold their elements in sequence and are generally used to store collections of related things.
 
 **Objects** hold their elements in key-value pairs and are generally used either to "map" between values (like word to definitions in a dictionary) or to describe something with various attributes.
 
-## Higher Order Functions
+## Higher-Order Functions
 
-Functions that can take as arguments or return as output, other functions are called **higher order functions**.
+Functions that take other functions as arguments or return them as output are called **higher-order functions**. JavaScript provides a number of useful array methods that fit this definition that provide a level of abstraction to simplify array traversal (going through each element in an array and performing some operation).
 
 ### Passing Functions to Functions (5 minutes / 00:25)
 
-Create a directory called `js-higher-order-functions` in your sandbox directory.
-Inside of it create an `index.html` file and a `script.js` file.
-Add boilerplate to `index.html`, link the script, and add a `console.log` to the script to make sure everything is wired up properly.
+In order to explore some of the higher-order functions JavaScript provides, let's set up a simple development environment:
 
-Higher order functions make it possible for us to pass custom behavior to functions that do generic tasks.
-There is an especially common task of looping through an array that we very commonly use higher order functions.
+- Create a directory called `js-higher-order-functions` in your `sandbox` directory
+- Inside of it create an `index.html` file and a `script.js` file
+- Add boilerplate to `index.html`, link the script, and add a `console.log` to the script to make sure everything is wired up properly
 
 We'll use the following array for the next few examples...
 
@@ -73,21 +70,21 @@ const wdiInstructors = [
       first: 'Andrew',
       last: 'Whitley'
     },
-    cohort: 17
+    cohort: 19
   },
   {
     name: {
-      first: 'Juan',
-      last: 'Garcia'
+      first: 'Perry',
+      last: 'Fustero'
     },
-    cohort: 17
+    cohort: 19
   },
   {
     name: {
-      first: 'John',
-      last: 'Master'
+      first: 'Zakk',
+      last: 'Fleischmann'
     },
-    cohort: 17
+    cohort: 19
   },
   {
     name: {
@@ -98,8 +95,8 @@ const wdiInstructors = [
   },
   {
     name: {
-      first: 'Eric',
-      last: 'Green'
+      first: 'Mike',
+      last: 'Nabil'
     },
     cohort: 18
   },
@@ -112,36 +109,34 @@ const wdiInstructors = [
   }
 ]
 ```
-#### forEach (10 minutes / 00:35)
+#### .forEach() (10 minutes / 00:35)
 
 Very frequently, we will want to go through an array and do something for every element in the array.
 
-As an example, we'll loop through the above array printing the line `'<Instructor name> is an instructor for WDI<cohort number>'` for each instructor.
+As an example, we'll loop through the above array printing the line `'<Instructor name> is an instructor for WDI<cohort number>'` to the console for each instructor.
 
-In languages without higher order functions, we would need to use a loop to preform this task (and we can do so in JS)...
+In languages without higher-order functions, we would need to use a loop to perform this task (and we can do so in JS)...
 
 ```js
 for (let i = 0; i < wdiInstructors.length; i++) {
-  const instructor = wdiInstructors[i]
-  const instructorName = instructor.name.first + ' ' + instructor.name.last
-  const cohort = `WDI${instructor.cohort}`
-  const instructorGreeting = `Hi, I'm ${instructorName}! I'm an instructor for ${cohort}`
+  let instructor = wdiInstructors[i]
+  let instructorName = instructor.name.first + ' ' + instructor.name.last
+  let instructorGreeting = `Hi, I'm ${instructorName}! I'm an instructor for WDI${instructor.cohort}`
   console.log(instructorGreeting)
 }
 ```
 
-We can write a function that encapsulates the action taken on each instructor object...
+If we want, we can write a function that encapsulates the operation taken on each instructor object...
 
 ```js
-function printInstructorGreeting (instructor){
-  const instructorName = instructor.name.first + ' ' + instructor.name.last
-  const cohort = `WDI${instructor.cohort}`
-  const instructorGreeting = `Hi, I'm ${instructorName}! I'm an instructor for ${cohort}`
+function printInstructorGreeting (instructor) {
+  let instructorName = instructor.name.first + ' ' + instructor.name.last
+  let instructorGreeting = `Hi, I'm ${instructorName}! I'm an instructor for WDI${instructor.cohort}`
   console.log(instructorGreeting)
 }
 ```
 
-And rewrite the loop to use this function...
+And then rewrite the loop to call this function and pass in each instructor object as an argument...
 
 ```js
 for (let i = 0; i < wdiInstructors.length; i++) {
@@ -149,42 +144,68 @@ for (let i = 0; i < wdiInstructors.length; i++) {
 }
 ```
 
-We can go even further and write a `forEach` function that takes care of the loop boilerplate for us as well...
-
-```js
-function forEach (array, fn){
-  for (let i = 0; i < array.length; i++) {
-    fn(array[i])
-  }
-}
-```
-
-We can now write our original loop in one line using our helper methods...
-
-```js
-forEach(wdiInstructors, printInstructorGreeting)
-```
-
-This is such a common process that JavaScript has `forEach` (and a bunch of other helpful higher lever functions) built into arrays.
-We call them with **dot notation** because they are methods (functions attached to an object), an idea we'll dive into further this afternoon.
+This process of iterating through an array is so common that JavaScript provides an array method for it called `forEach`. Methods are functions attached to an object (in this case, attached to the Array). Let's update our code to `forEach` in place of a `for` loop.
 
 ```js
 wdiInstructors.forEach(printInstructorGreeting)
 ```
+> Note that here we are *referencing* the `printInstructorGreeting` function, not invoking it
 
-#### map (10 minutes / 00:45)
+This will go through each object in the `wdiInstructors` array and execute the `printInstructorGreeting` function for each object in it, passing each object into the function as an argument.
 
-We discussed functions that were called for their **side effect** versus functions that are called for their **return value** or **output** when we introduce functions.
+Commonly, we might write this using an *anonymous function* (unnamed) instead of a *named function* (as we did above). If we changed the above code to use an anonymous function, it would look like this:
 
-Does `printInstructorGreeting` have any output? What about side-effects?
+```js
+wdiInstructors.forEach(function (instructor) {
+  let instructorName = instructor.name.first + ' ' + instructor.name.last
+  let instructorGreeting = `Hi, I'm ${instructorName}! I'm an instructor for WDI${instructor.cohort}`
+  console.log(instructorGreeting)
+})
+```
+> Note that this is functionally no different than the above code snippet, only here we are defining an anonymous function and passing it in instead of defining one externally and referencing it as an argument.
 
-Frequently, rather than do **something for each** piece of data, we want to do **something to each** piece of data, applying some transformation to the items in the array.
+We could rewrite this to use ES6 arrow functions as well:
+
+```js
+wdiInstructors.forEach((instructor) => {
+  let instructorName = instructor.name.first + ' ' + instructor.name.last
+  let instructorGreeting = `Hi, I'm ${instructorName}! I'm an instructor for WDI${instructor.cohort}`
+  console.log(instructorGreeting)
+})
+```
+
+##### Return Value
+When using any function or method, it is important to keep in mind the return value that it will output. With `forEach`, the return value is `undefined`. As such, we should use `forEach` when we want to *use* each item in an array to produce some *side effect*, but **not** to produce a new version of the array. For example, this would be a misuse of `forEach`:
+
+```js
+let letters = ['a', 'b', 'c']
+let capLetters = letters.forEach((letter) => letter.toUpperCase())
+console.log(capLetters)
+// => undefined
+```
+
+If we wanted to create a new, modified version of an array, we would use `map`...
+
+#### .map() (10 minutes / 00:45)
+
+We've discussed functions that were called for their **side effect** versus functions that are called for their **return value** or **output**. In the previous example, we used `forEach` to produce some *side effect*.
+
+Frequently, however, rather than do **something with each** item in an array, we want to do **something to each** item, applying some transformation and producing a new, modified version of the array.
 
 `forEach` has a closely related sibling `map` that instead of calling a passed function for its effect, it calls a passed function for its return value and creates a new array of the return values.
 
 Let's write a loop to create an array called `instructorNames` that will be an array of 6 strings, the instructor names.
 
-First, we'll write a function that takes an individual instructor object and returns the name string.
+```js
+const instructorNames = []
+for (let i = 0; i > wdiInstructors.length; i++) {
+  let instructor = wdiInstructors[i]
+  let instructorName = instructor.name.first + ' ' + instructor.name.last
+  instructorNames.push(instructorName)
+}
+```
+
+Similar to the process before, let's abstract the block of code in the `for` loop into a function and call it `getFullName`
 
 ```js
 function getFullName (instructor){
@@ -197,39 +218,27 @@ Next we'll write a loop that calls this function on each instructor in the array
 ```js
 const instructorNames = []
 for (let i = 0; i > wdiInstructors.length; i++) {
-  instructorNames.push(getFullName(wdiInstructors[i]))
+  let fullName = getFullName(wdiInstructors[i])
+  instructorNames.push(fullName)
 }
 ```
 
-We can write a function that takes care of this looping and array building boilerplate...
+Now, instead of using a `for` loop to populate an external array (side effect), let's use the `map` array method to create a new array using `map`'s **return value**:
 
 ```js
-function map (array, fn) {
-  const result = []
-  for (let i = 0;  i > array.length; i++) {
-    result.push(fn(array[i]))
-  }
-  return result
-}
+const instructorNames = wdiInstructors.map(getFullName)
 ```
 
-We can now use our map function to write...
+We can also use an anonymous function instead of a named one:
 
 ```js
-const instructorNames2 = map(wdiInstructors, getFullName)
-```
-
-Like `forEach`, `map` is also a built-in method available on arrays...
-
-```js
-const instructorNames3 = wdiInstructors.map(getFullName)
-
-// or with an anonymous function
-
-const instructorNames4 = wdiInstructors.map(instructor => {
+const instructorNames = wdiInstructors.map((instructor) => {
   return instructor.name.first + ' ' + instructor.name.last
 })
 ```
+
+#### Return Value
+`map` will return an array that is composed of the **return values** of the function given when called with each item of the array passed in as an argument.
 
 #### Filter (10 minutes / 00:55)
 
@@ -256,35 +265,20 @@ for (let i = 0;  i > wdiInstructors.length; i++) {
 }
 ```
 
-A function that takes care of the looping and condition checking would look like...
-
-```js
-function filter (array, fn) {
-  const result = []
-  for (let i = 0;  i > array.length; i++) {
-    if (fn(array[i])) {
-      result.push(array[i])
-    }
-  }
-  return result
-}
-```
-
-And we can use the function...
-
-```js
-const wdi17one = filter(wdiInstructors, teaches17)
-```
-
 Like the others, `filter` is available directly on arrays...
 
 ```js
 const wdi17two = wdiInstructors.filter(teaches17)
-
-// or with an anonymous function
-
-const wdi17three = wdiInstructors.filter(instructor => instructor.cohort === 17)
 ```
+Or using an anonymous function..
+```js
+const wdi17three = wdiInstructors.filter((instructor) => {
+  return instructor.cohort === 17
+})
+```
+
+#### Return Value
+`filter` will return a new, modified array composed of items for which the passed in function **returns true** when called on each item.
 
 #### Practice (10 minutes / 1:05)
 (7 minutes working / 3 minutes discussing)
@@ -296,7 +290,7 @@ Use either your `script.js` file you've been working in or open [repl.it](https:
 - Using the array traversal methods we were just looking at, create the following values (keep track of your answers)
 
 1. Create an array of strings for each capital with the city and state name (e.g. `'Austin, Texas'`)
-2. Filter all the states with capitals that start with a consonant.
+2. Filter all the states with capitals that start with the letter `A`.
 3. List all the sates with two words in their name.
 4. How many capitals are north of Annapolis?
 
@@ -306,8 +300,14 @@ Use either your `script.js` file you've been working in or open [repl.it](https:
 #### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (15 minutes / 01:30)
 
 The most generic list comprehension function is called `reduce`.
-Both map and filter build up an arrays as they go through the list.
+Both map and filter build up arrays as they go through the list.
 Reduce gives you custom control of the value you build as you go through the list.
+
+Taking the sum of an array of numbers...
+
+```js
+const total = [1, 3, 5, 7].reduce((sum, num) => sum + num, 0)
+```
 
 Mapping with reduce...
 
@@ -315,12 +315,6 @@ Mapping with reduce...
 const instructorNames5 = wdiInstructors.reduce((names, instructor) => {
   return names.push(instructor.name.first + ' ' + instructor.name.last)
 }, [])
-```
-
-Taking the sum of an array of numbers...
-
-```js
-const total = [1, 3, 5, 7].reduce((sum, num) => sum + num, 0)
 ```
 
 Filtering even numbers...
@@ -361,7 +355,7 @@ For a step by step of how the mechanics work, check out [this section on the MDN
 
 #### Sort (10 minutes / 2:10)
 
-The `sort` method is another higher order function which gets a test function but the sort test is slightly more complicated.
+The `sort` method is another higher-order function which gets a test function but the sort test is slightly more complicated.
 
 The test function for `sort` is called with two arguments `a` and `b` which represent any two elements being sorted.
 
@@ -399,7 +393,7 @@ How would we write a compare function to sort our capitals from most northern to
 
 ### Looking Forward: Callbacks (5 minutes / 2:15)
 
-While array traversal methods are a very common example of higher order functions, an even more common time that we want to pass functions as arguments to other functions is called a callback.
+While array traversal methods are a very common example of higher-order functions, an even more common time that we want to pass functions as arguments to other functions is called a callback.
 
 These are ideas we'll cover in depth in a couple of classes but consider the following at a high level as a primer.
 
@@ -469,7 +463,7 @@ Eloquent JavaScript has a really great [explanation of closures](http://eloquent
 
 - Check out the [Coding Meetup Kata's](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe) for lots more practice
 - [Node School Workshoppers](https://nodeschool.io/#workshoppers)
-- [Eloquent JS Higher Order Functions](http://eloquentjavascript.net/05_higher_order.html)
+- [Eloquent JS Higher-Order Functions](http://eloquentjavascript.net/05_higher_order.html)
 
 #### Review
 - What is the difference between output and a side effect?
