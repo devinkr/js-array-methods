@@ -189,7 +189,7 @@ wdiInstructors.forEach(function (instructor) {
 ```
 > Note that this is functionally no different than the above code snippet, only here we are defining an anonymous function and passing it in instead of defining one externally and referencing it as an argument.
 
-We could rewrite this to use ES6 arrow functions as well:
+We could rewrite this to use ES6 arrow functions as well...
 
 ```js
 wdiInstructors.forEach((instructor) => {
@@ -200,11 +200,13 @@ wdiInstructors.forEach((instructor) => {
 ```
 
 ##### Return Value
-When using any function or method, it is important to keep in mind the return value that it will output. With `forEach`, the return value is `undefined`. As such, we should use `forEach` when we want to *use* each item in an array to produce some *side effect*, but **not** to produce a new version of the array. For example, this would be a misuse of `forEach`:
+When using any function or method, it is important to keep in mind the return value that it will output. With `forEach`, the return value is `undefined`. As such, we should use `forEach` when we want to *use* each item in an array to produce some *side effect*, but **not** to produce a new version of the array. For example, this would be a misuse of `forEach`...
 
 ```js
 let letters = ['a', 'b', 'c']
-let capLetters = letters.forEach((letter) => letter.toUpperCase())
+let capLetters = letters.forEach((letter) => {
+  return letter.toUpperCase()
+})
 console.log(capLetters)
 // => undefined
 ```
@@ -233,7 +235,7 @@ for (let i = 0; i > wdiInstructors.length; i++) {
 Similar to the process before, let's abstract the block of code in the `for` loop into a function and call it `getFullName`
 
 ```js
-function getFullName (instructor){
+function getFullName (instructor) {
   return instructor.name.first + ' ' + instructor.name.last
 }
 ```
@@ -254,7 +256,7 @@ Now, instead of using a `for` loop to populate an external array (side effect), 
 const instructorNames = wdiInstructors.map(getFullName)
 ```
 
-We can also use an anonymous function instead of a named one:
+We can also use an anonymous function instead of a named one...
 
 ```js
 const instructorNames = wdiInstructors.map((instructor) => {
