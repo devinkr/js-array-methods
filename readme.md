@@ -1,4 +1,4 @@
-# Higher-Order Functions
+# Array Iteration Methods & Higher-Order Functions
 
 ## Learning Objectives
 
@@ -8,13 +8,32 @@
 - Define `every` and `some`
 - Describe a closure
 
-## Review
+## Framing & Review (15 min / 0:15)
 
-### What is a function? (10 minutes / 00:10)
+Today we will cover some array methods which are used to transform arrays. 
+This could be as simple as multiplying each number in an array of numbers by a certain factor, or adding them all together to obtain their sum.
+
+### JavaScript Collections
+
+Numbers, Strings, and Booleans are our basic building blocks of data but on their own, they don't express much. We use collections, most commonly Objects and Arrays to build up data to describe more complex entities.
+
+**Arrays** hold their elements in sequence and are generally used to store collections of related things.
+
+**Objects** hold their elements in key-value pairs and are generally used either to store & look up values (like word definitions in a dictionary), or to describe some thing or entity with various attributes.
+
+### JavaScript Functions
+
+What is a function?
+
 - Defined block of code that can be called by later code
 - Functions are defined with zero or more **parameters**
   - **Parameters** are the variables within a function that refer to its inputs
   - **Arguments** are the values passed in to the function when it is called
+
+<details>
+  <summary> What is a method? </summary>
+  A method is a function that is defined on an object or class. Methods begin with a <code>.</code>, since they are object-properties. For example, <code>.push()</code> and <code>.pop()</code> are methods, specifically <code>Array</code> methods.
+</details>
 
 #### Function Declaration
 
@@ -42,9 +61,9 @@ sum(3, 4) // function "sum" called with arguments a and b
 // => 7
 ```
 
-- Functions always return a value, either...
-  - *Explicitly*, by using a **return** statement
-  - *Implicitly*, if there is no **return** statement, by returning `undefined`
+Functions always return a value, either...
+  1. whatever follows a function's **return** statement
+  2. or if there is no **return** statement, the function returns the value `undefined`.
 
 ```js
 // in a repl
@@ -54,24 +73,21 @@ console.log('hello!')
 //// console.log() returns `undefined`, which appears below the console-logged message
 ```
 
-### Functions are regular values (5 minutes / 00:15)
-- Functions are **values** just like numbers (including `NaN`), strings, booleans, arrays, objects, `undefined`, and `null`
-- Functions can be assigned to variables and put into arrays and objects
-- Most importantly, functions can be given to other functions as arguments and/or returned from functions as output
+## CodeWars Sign Up
 
-### JavaScript Collections (5 minutes / 00:20)
+Next, let's head over to [CodeWars](https://www.codewwars.com) and sign up for an account. We'll have to pass one small challenge before we can successfully sign up for an account, but the good news is that we just covered it. If you already have a CodeWars account, then you've already completed this step.
 
-Numbers, Strings, and Booleans are our basic building blocks of data but on their own, they don't express much. We use collections, most commonly Objects and Arrays to build up data to describe more complex entities.
+### Functions as Values (5 minutes / 0:20)
 
-**Arrays** hold their elements in sequence and are generally used to store collections of related things.
-
-**Objects** hold their elements in key-value pairs and are generally used either to "map" between values (like word to definitions in a dictionary) or to describe something with various attributes.
+  - Functions are **values** just like numbers (including `NaN`), strings, booleans, arrays, objects, `undefined`, and `null`
+  - Functions can be referenced and put into arrays and objects
+  - Most importantly, functions can be passed into other functions as arguments, returned from functions as output, or both
 
 ## Higher-Order Functions
 
-Functions that take other functions as arguments or return them as output are called **higher-order functions**. JavaScript provides a number of useful array methods that fit this definition that provide a level of abstraction to simplify array traversal (going through each element in an array and performing some operation).
+Functions that take other functions as arguments or return them as output are called **higher-order functions**. JavaScript provides a number of useful array methods that fit this definition that provide a level of abstraction to simplify array iteration (going through each element in an array and performing some operation).
 
-### Passing Functions to Functions (5 minutes / 00:25)
+### Passing Functions to Functions (5 minutes / 0:25)
 
 In order to explore some of the higher-order functions JavaScript provides, let's set up a simple development environment:
 
@@ -134,7 +150,8 @@ const wdiInstructors = [
   }
 ]
 ```
-#### .forEach() (10 minutes / 00:35)
+
+#### .forEach() (10 minutes / :35)
 
 Very frequently, we will want to go through an array and do something for every element in the array.
 
@@ -205,7 +222,7 @@ When using any function or method, it is important to keep in mind the return va
 ```js
 let letters = ['a', 'b', 'c']
 let capLetters = letters.forEach((letter) => {
-  return letter.toUpperCase()
+  return letter.toUpperCase() //this return is pointless
 })
 console.log(capLetters)
 // => undefined
@@ -213,7 +230,7 @@ console.log(capLetters)
 
 If we wanted to create a new, modified version of an array, we would use `map`...
 
-#### .map() (10 minutes / 00:45)
+#### .map() (10 minutes / 0:45)
 
 We've discussed functions that were called for their **side effect** versus functions that are called for their **return value** or **output**. In the previous example, we used `forEach` to produce some *side effect*.
 
@@ -232,7 +249,7 @@ for (let i = 0; i > wdiInstructors.length; i++) {
 }
 ```
 
-Similar to the process before, let's abstract the block of code in the `for` loop into a function and call it `getFullName`
+Similar to the process before, let's abstract the block of code in the `for` loop into a function, and call it `getFullName`...
 
 ```js
 function getFullName (instructor) {
@@ -240,7 +257,7 @@ function getFullName (instructor) {
 }
 ```
 
-Next we'll write a loop that calls this function on each instructor in the array and stores the results in the `instructorNames` array.
+Next, we'll write a loop that calls this function on each instructor in the array and stores the results in the `instructorNames` array....
 
 ```js
 const instructorNames = []
@@ -267,7 +284,14 @@ const instructorNames = wdiInstructors.map((instructor) => {
 #### Return Value
 `map` will return an array that is composed of the **return values** of the function given when called with each item of the array passed in as an argument.
 
-#### Filter (10 minutes / 00:55)
+#### Practicing with Map (15 min, 1:00)
+(10 min, 5 Review)
+
+[CodeWars](https://www.codewars.com/kata/coding-meetup-number-2-higher-order-functions-series-greet-developers)
+
+## Break (10 min / 1:10)
+
+### Filter (10 minutes / 1:20)
 
 Another common procedure is to filter elements from an array based on some custom condition.
 
@@ -276,61 +300,69 @@ The condition will take the form of a function that will return `true` or `false
 First we'll write the filter function (the custom condition)...
 
 ```js
-function teaches17(instructor) {
-  return instructor.cohort === 17
+function teachesWDI20(instructor) {
+  return instructor.cohort === 20
 }
 ```
 
 We can write a loop that uses this function...
 
 ```js
-const wdi17 = []
+const wdi20 = []
 for (let i = 0;  i > wdiInstructors.length; i++) {
-  if (teaches17(wdiInstructors[i])) {
-    wdi17.push(wdiInstructors[i])
+  if (teachesWDI20(wdiInstructors[i])) {
+    wdi20.push(wdiInstructors[i])
   }
 }
 ```
 
-Like the others, `filter` is available directly on arrays...
+Like `.map()` and `.forEach()`, `filter` is available directly on arrays...
 
 ```js
-const wdi17two = wdiInstructors.filter(teaches17)
+const wdi20two = wdiInstructors.filter(teachesWDI20)
 ```
-Or using an anonymous function..
+
+Or using an anonymous function...
+
 ```js
-const wdi17three = wdiInstructors.filter((instructor) => {
-  return instructor.cohort === 17
+const wdi20three = wdiInstructors.filter((instructor) => {
+  return instructor.cohort === 20
 })
 ```
 
 #### Return Value
 `filter` will return a new, modified array composed of items for which the passed in function **returns true** when called on each item.
 
-#### Practice (10 minutes / 1:05)
-(7 minutes working / 3 minutes discussing)
+#### Practice (15 minutes / 1:35)
+  > (10 minutes working / 5 minutes discussing)
 
 Use either your `script.js` file you've been working in or open [repl.it](https://repl.it/languages/javascript).
 
 - Declare a variable `states`.
 - Assign to it the array of objects from `capitals.json`.
-- Using the array traversal methods we were just looking at, create the following values (keep track of your answers)
+   > ⌘+A: Select All, copy & paste
+- Using the array iteration methods we were just looking at, create the following values (keep track of your answers)
 
 1. Create an array of strings for each capital with the city and state name (e.g. `'Austin, Texas'`)
 2. Filter all the states with capitals that start with the letter `A`.
-3. List all the sates with two words in their name.
+3. List all the states with two words in their name.
 4. How many capitals are north of Annapolis?
 
+#### Code Challenge (10 minutes / 1:45)
 
-## Break (10 minutes / 01:15)
+[Codewars](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe)
 
-#### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (15 minutes / 01:30)
+## Break (10 minutes / 01:55)
 
-The most generic list comprehension function is called `reduce`.
-Both map and filter build up arrays as they go through the list.
-Reduce gives you custom control of the value you build as you go through the list.
+### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (15 minutes / 02:10)
 
-Taking the sum of an array of numbers...
+The most flexible array method function is called `reduce`. Reduce, as the name implies, can take an array and reduce to it to fewer things.However, since it is the most flexible of the array iteration methods, it can implement the functionality of `map`, `filter`, `forEach`, etc.
+
+Reduce is usually difficult to grasp at first; don't stress about this. It is definitely not something you need to have mastered, it is just good to have an early awareness. It takes a fair amount of practice to intuitively use `.reduce()` when solving problems.
+
+#### Example
+
+We can take the sum of an array of numbers (i.e. reduce the set of numbers to a sum)...
 
 ```js
 const total = [1, 3, 5, 7].reduce((sum, num) => sum + num, 0)
@@ -366,21 +398,26 @@ const numEvens = [1, 2, 3, 4, 5, 6, 7].reduce((count, num) => {
 }, 0)
 ```
 
-Reduce can be hard to grasp at first; don't stress about this. It is definitely not something you need to have mastered, it is just good to have an awareness. It takes some practice to use `.reduce` intuitively when solving problems.
+#### Histogram
 
-For a step by step of how the mechanics work, check out [this section on the MDN page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works)
+For a step by step of how the mechanics work, check out [this section on the MDN page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works).
 
-#### Exercise: Defining Some and Every (30 minutes / 02:00)
+```js
+const names = ['Tabitha', 'Jimothy', 'Toad', 'Tabitha', 'Bertha']
 
-(20 minutes small groups / 10 minutes class discussion)
+const histogramObject = names.reduce((histogram, name) => { 
+  if (histogram[name]) {
+    histogram[name]++
+  } else {
+    histogram[name] = 1
+  }
+  return histogram
+}, {})
+// histogramObject is:
+// { 'Tabitha': 2, 'Jimothy': 1, 'Toad': 1, 'Bertha': 1 }
+```
 
-- There are two related methods, `some` and `every` that each take a test function (like filter) and applies it to each element of an array.
-- `some` will return true if the test function returns true given **any** of the items in the array and false otherwise.
-- `every` will return true if the test function returns true for **every** one of the items in the array and false otherwise.
-- Working with a partner at your table define functions `some` and `every` that take an array and a function and work as described.
-
-
-#### Sort (10 minutes / 2:10)
+#### Sort (10 minutes / 2:20)
 
 The `sort` method is another higher-order function which gets a test function but the sort test is slightly more complicated.
 
@@ -396,8 +433,8 @@ By default, `sort` uses a compare function that converts `a` and `b` to strings 
 This leads to the odd behavior of `10` being sorted in front of `2`.
 
 ```js
-[1, 2, 10, 20, 3, -1, 12].sort()
-// => [-1, 1, 10, 12, 2, 20, 3]
+[111, 2, 10, 20, 3, -1, 12].sort()
+// => [-1, 10, 111, 12, 2, 20, 3]
 ```
 
 To write a compare function that works as expected...
@@ -408,19 +445,19 @@ function compareNumbers(a,b) {
 }
 
 // with a named function
-[1, 2, 10, 20, 3, -1, 12].sort(compareNumbers)
+[111, 2, 10, 20, 3, -1, 12].sort(compareNumbers)
 // => [-1, 1, 2, 3, 10, 12, 20]
 
 // with an anonymous function
-[1, 2, 10, 20, 3, -1, 12].sort((a, b) => a - b)
+[111, 2, 10, 20, 3, -1, 12].sort((a, b) => a - b)
 // => [-1, 1, 2, 3, 10, 12, 20]
 ```
 
 How would we write a compare function to sort our capitals from most northern to most southern?
 
-### Looking Forward: Callbacks (5 minutes / 2:15)
+### Looking Forward: Callbacks (5 minutes / 2:25)
 
-While array traversal methods are a very common example of higher-order functions, an even more common time that we want to pass functions as arguments to other functions is called a callback.
+While array iteration methods are a very common example of higher-order functions, an even more common time that we want to pass functions as arguments to other functions is called a callback.
 
 These are ideas we'll cover in depth in a couple of classes but consider the following at a high level as a primer.
 
@@ -431,62 +468,7 @@ All the examples that we have looked at use the function being passed as an argu
 Callbacks are generally called at some time in the future.
 What types of things might we want to trigger a function call on?
 
-### Returning Functions from Functions
-
-We can also build functions with other functions.
-
-```js
-function multiplyBy (num) {
-  return (anotherNum) => num * anotherNum
-}
-
-const multiplyBy2 = multiplyBy(2)
-const multiplyBy5 = multiplyBy(5)
-
-console.log(multiplyBy2(4))
-console.log(multiplyBy5(4))
-```
-
-#### Closures (5 minutes / 2:20)
-
-Notice that even though `num` in not defined within the function being returned, it is still remembered by the function through what is called the function's **closure**.
-
-We can right some really neat code taking advantage of **closures**.
-
-```js
-function Locker(password){
-  let locked = true
-  let content
-
-  return {
-    toggle (pwd) {
-      if (pwd === password){
-        locked = !locked
-      }
-      return locked
-    },
-    read () {
-      if (locked) {
-        return "unlock to read"
-      } else {
-        return content
-      }
-    },
-    write (newContent) {
-      if (locked) {
-        return "unlock to write"
-      } else {
-        content = newContent
-        return content
-      }
-    }
-  }
-}
-```
-
-Eloquent JavaScript has a really great [explanation of closures](http://eloquentjavascript.net/03_functions.html#h_hOd+yVxaku).
-
-### Review and Questions (10 minutes / 2:30)
+### Review and Questions (5 minutes / 2:30)
 
 - Check out the [Coding Meetup Kata's](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe) for lots more practice
 - [Node School Workshoppers](https://nodeschool.io/#workshoppers)
