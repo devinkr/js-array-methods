@@ -16,34 +16,52 @@
   - **Parameters** are the variables within a function that refer to its inputs
   - **Arguments** are the values passed in to the function when it is called
 
+#### Function Declaration
+
 ```js
 function sum (a, b) { // function "sum" defined with parameters a and b
   return a + b
 }
+```
 
+#### Function Expression
+
+```js
+// ES5 Style
+var sum = function (a, b) { 
+  return a + b
+}
+
+// ES6 Stlye, with Arrow Functions
+const sum = (a, b) => a + b
+```
+
+#### Function Invocation (calling a function)
+```js
 sum(3, 4) // function "sum" called with arguments a and b
 // => 7
 ```
 
-- Functions always return a value
-  - Either explicitly using a **return** statement
-  - Or, implicitly by returning `undefined`
+- Functions always return a value, either...
+  - *Explicitly*, by using a **return** statement
+  - *Implicitly*, if there is no **return** statement, by returning `undefined`
 
 ```js
 // in a repl
 console.log('hello!')
 // 'hello!'
 // => undefined
+//// console.log() returns `undefined`, which appears below the console-logged message
 ```
 
 ### Functions are regular values (5 minutes / 00:15)
-- Functions are values just like numbers, strings, booleans, arrays, objects, `undefined`, and `null`
+- Functions are **values** just like numbers (including `NaN`), strings, booleans, arrays, objects, `undefined`, and `null`
 - Functions can be assigned to variables and put into arrays and objects
 - Most importantly, functions can be given to other functions as arguments and/or returned from functions as output
 
 ### JavaScript Collections (5 minutes / 00:20)
 
-Numbers, Strings, and Booleans are our basic building block of data but on their own, they don't express much. We use collections, most commonly Objects and Arrays to build up data to describe more complex entities.
+Numbers, Strings, and Booleans are our basic building blocks of data but on their own, they don't express much. We use collections, most commonly Objects and Arrays to build up data to describe more complex entities.
 
 **Arrays** hold their elements in sequence and are generally used to store collections of related things.
 
@@ -57,9 +75,9 @@ Functions that take other functions as arguments or return them as output are ca
 
 In order to explore some of the higher-order functions JavaScript provides, let's set up a simple development environment:
 
-- Create a directory called `js-higher-order-functions` in your `sandbox` directory
-- Inside of it create an `index.html` file and a `script.js` file
-- Add boilerplate to `index.html`, link the script, and add a `console.log` to the script to make sure everything is wired up properly
+  1. Create a directory called `js-higher-order-functions` in your `sandbox` directory.
+  2. Inside of it create an `index.html` file and a `script.js` file.
+  3. Add boilerplate to `index.html`, link the script, then add a `console.log` to the script to make sure everything is wired up properly.
 
 We'll use the following array for the next few examples...
 
@@ -91,21 +109,28 @@ const wdiInstructors = [
       first: 'Ali',
       last: 'Spittel'
     },
-    cohort: 18
+    cohort: 20
   },
   {
     name: {
       first: 'Mike',
       last: 'Nabil'
     },
-    cohort: 18
+    cohort: 20
+  },
+  {
+    name: {
+      first: 'Max Power',
+      last: 'Oppenheimer'
+    },
+    cohort: 20
   },
   {
     name: {
       first: 'James',
       last: 'Reichard'
     },
-    cohort: 18
+    cohort: 20
   }
 ]
 ```
