@@ -27,12 +27,12 @@ What is a function?
 
 - Defined block of code that can be called by later code
 - Functions are defined with zero or more **parameters**
-  - **Parameters** are the variables within a function that refer to its inputs
+  - **Parameters** are the variables for the function inputs upon definition
   - **Arguments** are the values passed in to the function when it is called
 
 <details>
   <summary> What is a method? </summary>
-  A method is a function that is defined on an object or class. Methods begin with a <code>.</code>, since they are object-properties. For example, <code>.push()</code> and <code>.pop()</code> are methods, specifically <code>Array</code> methods.
+  A method is a function that is defined on an object or class. Methods begin with a <code>.</code>, since they are object-properties. For example, <code>.push()</code> and <code>.reverse()</code> are methods, specifically <code>Array</code> methods.
 </details>
 
 #### Function Declaration
@@ -51,7 +51,7 @@ var sum = function (a, b) {
   return a + b
 }
 
-// ES6 Stlye, with Arrow Functions
+// ES6 Style, with Arrow Functions
 const sum = (a, b) => a + b
 ```
 
@@ -101,24 +101,24 @@ We'll use the following array for the next few examples...
 const wdiInstructors = [
   {
     name: {
-      first: 'Andrew',
-      last: 'Whitley'
+      first: 'Meg',
+      last: 'MacIver'
     },
-    cohort: 19
+    cohort: 21
   },
   {
     name: {
       first: 'Perry',
       last: 'Fustero'
     },
-    cohort: 19
+    cohort: 21
   },
   {
     name: {
       first: 'Zakk',
       last: 'Fleischmann'
     },
-    cohort: 19
+    cohort: 21
   },
   {
     name: {
@@ -136,7 +136,7 @@ const wdiInstructors = [
   },
   {
     name: {
-      first: 'Max Power',
+      first: 'Max',
       last: 'Oppenheimer'
     },
     cohort: 20
@@ -157,7 +157,7 @@ Very frequently, we will want to go through an array and do something for every 
 
 As an example, we'll loop through the above array printing the line `'<Instructor name> is an instructor for WDI<cohort number>'` to the console for each instructor.
 
-In languages without higher-order functions, we would need to use a loop to perform this task (and we can do so in JS)...
+Without higher-order functions, we would need to use a loop to perform this task (and we can do so in JS)...
 
 ```js
 for (let i = 0; i < wdiInstructors.length; i++) {
@@ -300,33 +300,33 @@ The condition will take the form of a function that will return `true` or `false
 First we'll write the filter function (the custom condition)...
 
 ```js
-function teachesWDI20(instructor) {
-  return instructor.cohort === 20
+function teachesWDI21(instructor) {
+  return instructor.cohort === 21
 }
 ```
 
 We can write a loop that uses this function...
 
 ```js
-const wdi20 = []
+const wdi21 = []
 for (let i = 0;  i > wdiInstructors.length; i++) {
-  if (teachesWDI20(wdiInstructors[i])) {
-    wdi20.push(wdiInstructors[i])
+  if (teachesWDI21(wdiInstructors[i])) {
+    wdi21.push(wdiInstructors[i])
   }
 }
 ```
 
-Like `.map()` and `.forEach()`, `filter` is available directly on arrays...
+Like `.map()` and `.forEach()`, `.filter()` is available directly on arrays...
 
 ```js
-const wdi20two = wdiInstructors.filter(teachesWDI20)
+const wdi21two = wdiInstructors.filter(teachesWDI21)
 ```
 
 Or using an anonymous function...
 
 ```js
-const wdi20three = wdiInstructors.filter((instructor) => {
-  return instructor.cohort === 20
+const wdi21three = wdiInstructors.filter((instructor) => {
+  return instructor.cohort === 21
 })
 ```
 
@@ -339,7 +339,7 @@ const wdi20three = wdiInstructors.filter((instructor) => {
 Use either your `script.js` file you've been working in or open [repl.it](https://repl.it/languages/javascript).
 
 - Declare a variable `states`.
-- Assign to it the array of objects from `capitals.json`.
+- Assign to it the array of objects from `capitals.json` in this repo.
    > ⌘+A: Select All, copy & paste
 - Using the array iteration methods we were just looking at, create the following values (keep track of your answers)
 
@@ -356,7 +356,7 @@ Use either your `script.js` file you've been working in or open [repl.it](https:
 
 ### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (15 minutes / 02:10)
 
-The most flexible array method function is called `reduce`. Reduce, as the name implies, can take an array and reduce to it to fewer things.However, since it is the most flexible of the array iteration methods, it can implement the functionality of `map`, `filter`, `forEach`, etc.
+The most flexible array method function is called `reduce`. Reduce, as the name implies, can take an array and reduce it to fewer things. However, since it is the most flexible of the array iteration methods, it can implement the functionality of `map`, `filter`, `forEach`, etc.
 
 Reduce is usually difficult to grasp at first; don't stress about this. It is definitely not something you need to have mastered, it is just good to have an early awareness. It takes a fair amount of practice to intuitively use `.reduce()` when solving problems.
 
@@ -372,7 +372,8 @@ Mapping with reduce...
 
 ```js
 const instructorNames5 = wdiInstructors.reduce((names, instructor) => {
-  return names.push(instructor.name.first + ' ' + instructor.name.last)
+  names.push(instructor.name.first + ' ' + instructor.name.last)
+  return names
 }, [])
 ```
 
@@ -419,25 +420,30 @@ const histogramObject = names.reduce((histogram, name) => {
 
 #### Sort (10 minutes / 2:20)
 
-The `sort` method is another higher-order function which gets a test function but the sort test is slightly more complicated.
+The `sort` method is another higher-order function.
 
-The test function for `sort` is called with two arguments `a` and `b` which represent any two elements being sorted.
+If no input function is supplied, values are sorted as strings by default.
 
-Rather than returning `true` or `false` as in the case of the other test functions we've looked at, the compare function should...
-- return a negative number if `a` should come before `b`
-- return 0 if `a` and `b` are equal
-- return a positive number if `a` should come after `b`
+```js
+['chips', 'salsa', 'guacamole', 'cheese', 'jalapenos', 'sour cream'].sort()
+// => [ 'cheese', 'chips', 'guacamole', 'jalapenos', 'salsa', 'sour cream' ]
+```
 
-By default, `sort` uses a compare function that converts `a` and `b` to strings and sorts based on **unicode** values (alphabetized but with all uppercase characters before all lower case characters).
+If the elements are not strings, it converts them to strings and sorts based on **unicode** values (alphabetized but with all uppercase characters before all lower case characters).
 
-This leads to the odd behavior of `10` being sorted in front of `2`.
+This leads to the odd behavior of `10` being sorted in front of `2`...
 
 ```js
 [111, 2, 10, 20, 3, -1, 12].sort()
 // => [-1, 10, 111, 12, 2, 20, 3]
 ```
 
-To write a compare function that works as expected...
+To make the sort method work as expected, you can write a compare function. It takes two arguments `a` and `b`, which represent any two elements being sorted.
+
+Rather than returning `true` or `false` as in the case of the other test functions we've looked at, the elements are sorted according to the return value of the compare function...
+- return a negative number if `a` should come before `b`
+- return 0 if `a` and `b` are equal
+- return a positive number if `a` should come after `b`
 
 ```js
 function compareNumbers(a,b) {
@@ -471,7 +477,7 @@ What types of things might we want to trigger a function call on?
 ### Review and Questions (5 minutes / 2:30)
 
 - Check out the [Coding Meetup Kata's](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe) for lots more practice
-- [Node School Workshoppers](https://nodeschool.io/#workshoppers)
+- [Node School Workshoppers](https://nodeschool.io/#workshoppers) (Functional JavaScript elective)
 - [Eloquent JS Higher-Order Functions](http://eloquentjavascript.net/05_higher_order.html)
 
 #### Review
