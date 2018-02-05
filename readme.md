@@ -75,7 +75,7 @@ console.log('hello!')
 
 ## CodeWars Sign Up
 
-Next, let's head over to [CodeWars](https://www.codewwars.com) and sign up for an account. We'll have to pass one small challenge before we can successfully sign up for an account, but the good news is that we just covered it. If you already have a CodeWars account, then you've already completed this step.
+Next, let's head over to [CodeWars](https://www.codewars.com) and sign up for an account. We'll have to pass one small challenge before we can successfully sign up for an account, but the good news is that we just covered it. If you already have a CodeWars account, then you've already completed this step.
 
 ### Functions as Values (5 minutes / 0:20)
 
@@ -242,7 +242,7 @@ Let's write a loop to create an array called `instructorNames` that will be an a
 
 ```js
 const instructorNames = []
-for (let i = 0; i > wdiInstructors.length; i++) {
+for (let i = 0; i < wdiInstructors.length; i++) {
   let instructor = wdiInstructors[i]
   let instructorName = instructor.name.first + ' ' + instructor.name.last
   instructorNames.push(instructorName)
@@ -261,7 +261,7 @@ Next, we'll write a loop that calls this function on each instructor in the arra
 
 ```js
 const instructorNames = []
-for (let i = 0; i > wdiInstructors.length; i++) {
+for (let i = 0; i < wdiInstructors.length; i++) {
   let fullName = getFullName(wdiInstructors[i])
   instructorNames.push(fullName)
 }
@@ -309,7 +309,7 @@ We can write a loop that uses this function...
 
 ```js
 const wdi21 = []
-for (let i = 0;  i > wdiInstructors.length; i++) {
+for (let i = 0;  i < wdiInstructors.length; i++) {
   if (teachesWDI21(wdiInstructors[i])) {
     wdi21.push(wdiInstructors[i])
   }
