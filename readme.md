@@ -10,8 +10,8 @@
 ## Framing & Review (15 min / 0:15)
 
 Today we will cover some array methods which are used to transform arrays. This
-could be as simple as multiplying each number in an array of numbers by
-a certain factor, or adding them all together to obtain their sum.
+could be as simple as multiplying each number in an array of numbers by a
+certain factor, or adding them all together to obtain their sum.
 
 There are certainly ways to perform these tasks using `for` or `while` loops,
 bot those solutions have the disadvantage of being complex to read and reason
@@ -55,7 +55,8 @@ What is a function?
 #### Function Declaration
 
 ```js
-function sum (a, b) { // function "sum" defined with parameters a and b
+function sum(a, b) {
+  // function "sum" defined with parameters a and b
   return a + b
 }
 ```
@@ -64,7 +65,7 @@ function sum (a, b) { // function "sum" defined with parameters a and b
 
 ```js
 // ES5 Style
-var sum = function (a, b) { 
+var sum = function(a, b) {
   return a + b
 }
 
@@ -80,16 +81,19 @@ sum(3, 4) // function "sum" called with arguments a and b
 ```
 
 Functions always return a value, either...
-  1. whatever follows a function's **return** statement
-  2. or if there is no return statement, the function returns the value `undefined`.
+
+1. whatever follows a function's **return** statement
+2. or if there is no return statement, the function returns the value
+   `undefined`.
 
 ```js
 // in a repl
-console.log('hello!')
+console.log("hello!")
 // 'hello!'
 // => undefined
 //// console.log() returns `undefined`, which appears below the console-logged message
 ```
+
 
 ### CodeWars Sign Up
 
@@ -99,6 +103,7 @@ before you can create your account, but the good news is that we just covered
 it. If you already have a CodeWars account, then you've already completed this
 step.
 
+
 ### Functions as Values (5 minutes / 0:20)
 
 One of the things that makes JavaScript so powerful is that we can reference
@@ -106,20 +111,21 @@ functions and treat them like values stored in a variable.
 
 The impact of this is we can:
 
-* add functions to arrays and objects, just like any other value
-* pass functions as arguments to another function
-* return a function from a function
+- add functions to arrays and objects, just like any other value
+- pass functions as arguments to another function
+- return a function from a function
 
 > Open up a [repl.it](https://repl.it/languages/javascript) and see for
 > yourself!
 
 > 1. Create an array and add a function to it. How do you invoke it?
-> 1. Create a function that takes a function as an argument. How do you invoke it?
+> 1. Create a function that takes a function as an argument. How do you invoke
+>    it?
 > 1. Create a function that returns another function. How do you invoke them?
 
 Taking functions as arguments and returning functions is a little advanced, so
 we're just going to touch on it today. But the significance is: a function that
-takes a function as an argument is called a *higher-order function.*
+takes a function as an argument is called a _higher-order function._
 
 ## Higher-Order Functions
 
@@ -135,84 +141,33 @@ The purpose is to provide a level of abstraction and simplify array iteration
 In order to explore some of the higher-order functions JavaScript provides,
 let's set up a simple development environment:
 
-1. Create a directory called `js-higher-order-functions` in your `sandbox` directory.
+1. Create a directory called `js-higher-order-functions` in your `sandbox`
+   directory.
 1. Inside of it create an `index.html` file and a `script.js` file.
-1. Add boilerplate to `index.html`, link the script, then add a `console.log` to the script to make sure everything is wired up properly.
+1. Add boilerplate to `index.html`, link the script, then add a `console.log` to
+   the script to make sure everything is wired up properly.
 
 We'll use the following array for the next few examples:
 
 ```js
-const wdiInstructors = [
-  {
-    name: {
-      first: 'Meg',
-      last: 'MacIver'
-    },
-    cohort: 21
-  },
-  {
-    name: {
-      first: 'Perry',
-      last: 'Fustero'
-    },
-    cohort: 21
-  },
-  {
-    name: {
-      first: 'Zakk',
-      last: 'Fleischmann'
-    },
-    cohort: 21
-  },
-  {
-    name: {
-      first: 'Ali',
-      last: 'Spittel'
-    },
-    cohort: 20
-  },
-  {
-    name: {
-      first: 'Mike',
-      last: 'Nabil'
-    },
-    cohort: 20
-  },
-  {
-    name: {
-      first: 'Max',
-      last: 'Oppenheimer'
-    },
-    cohort: 20
-  },
-  {
-    name: {
-      first: 'James',
-      last: 'Reichard'
-    },
-    cohort: 20
-  }
-]
+const words = ["hello", "this", "is", "a", "stickup", "gimme", "your", "wallet"]
 ```
 
-### .forEach() (10 minutes / :35)
+### .forEach() (20 minutes / :45)
 
 Very frequently, we will want to go through an array and do something for every
 element in the array.
 
-As an example, we'll loop through the above array printing the line
-`'<Instructor name> is an instructor for WDI<cohort number>'` to the console for
-each instructor.
+As an example, we'll loop through the above array printing each value one at a
+time.
 
 Without higher-order functions, we would need to use a loop to perform this task
 (and we can do so in JS)...
 
 ```js
-for (let i = 0; i < wdiInstructors.length; i++) {
-  let instructor = wdiInstructors[i]
-  let instructorName = instructor.name.first + ' ' + instructor.name.last
-  let instructorGreeting = `Hi, I'm ${instructorName}! I'm an instructor for WDI${instructor.cohort}`
-  console.log(instructorGreeting)
+for (let i = 0; i < words.length; i++) {
+  let word = words[i]
+  console.log(word)
 }
 ```
 
@@ -220,10 +175,8 @@ If we want, we can write a function that encapsulates the operation taken on
 each instructor object:
 
 ```js
-function printInstructorGreeting (instructor) {
-  let instructorName = instructor.name.first + ' ' + instructor.name.last
-  let instructorGreeting = `Hi, I'm ${instructorName}! I'm an instructor for WDI${instructor.cohort}`
-  console.log(instructorGreeting)
+function printWord(word) {
+  console.log(word)
 }
 ```
 
@@ -231,177 +184,232 @@ And then rewrite the loop to call this function and pass in each instructor
 object as an argument...
 
 ```js
-for (let i = 0; i < wdiInstructors.length; i++) {
-  printInstructorGreeting(wdiInstructors[i])
+for (let i = 0; i < words.length; i++) {
+  printWord(words[i])
 }
 ```
 
 This process of iterating through an array is so common that JavaScript provides
 an array method for it called `forEach`. Methods are functions attached to an
-object (in this case, attached to the Array). Let's update our code to `forEach`
-in place of a `for` loop.
+object (in this case, attached to the Array). Let's get rid of the `for` loop
+and replace it with a `forEach`.
 
 ```js
-wdiInstructors.forEach(printInstructorGreeting)
+function printWord(word) {
+  console.log(word)
+}
+
+words.forEach(printWord)
 ```
-> Note that here we are *referencing* the `printInstructorGreeting` function, not invoking it
 
-This will go through each object in the `wdiInstructors` array and execute the
-`printInstructorGreeting` function for each object in it, passing each object
-into the function as an argument.
+> Note that here we are _referencing_ the `printWord` function, not invoking it.
+> Don't write this: `words.forEach(printWord())`
 
-Commonly, we might write this using an *anonymous function* (unnamed) instead of
-a *named function* (as we did above). If we changed the above code to use an
-anonymous function, it would look like this:
+This will go through each object in the `words` array and execute the
+`printWord` function for each object in it, passing each object into the
+function as an argument.
+
+Commonly, we might write this using an _anonymous function_ (unnamed) instead of
+a _named function_ (as we did above). An anonymous function is simply a function
+without a name, that we declare **inline**, or in place of a function argument.
+
+If we changed the above code to use an anonymous function, it would look like
+this:
 
 ```js
-wdiInstructors.forEach(function (instructor) {
-  let instructorName = instructor.name.first + ' ' + instructor.name.last
-  let instructorGreeting = `Hi, I'm ${instructorName}! I'm an instructor for WDI${instructor.cohort}`
-  console.log(instructorGreeting)
+words.forEach(function(word) {
+  console.log(word)
 })
 ```
 
 > Note that this is functionally no different than the above code snippet, only
-> here we are defining an anonymous function and passing it in instead of
-> defining one externally and referencing it as an argument.
+> here we are defining an anonymous function in place, instead of defining one
+> externally and referencing it as an argument.
 
-We could rewrite this to use ES6 arrow functions as well:
+We could rewrite this to use ES6 arrow functions as well. This is the most
+common form you'll see of these functions:
 
 ```js
-wdiInstructors.forEach((instructor) => {
-  let instructorName = instructor.name.first + ' ' + instructor.name.last
-  let instructorGreeting = `Hi, I'm ${instructorName}! I'm an instructor for WDI${instructor.cohort}`
-  console.log(instructorGreeting)
+words.forEach(word => {
+  console.log(word)
 })
 ```
 
-#### You Do: `.forEach`
+#### You Do: `.forEach` ( 5 minutes / 0:50)
 
 In your `script.js`, create an array of programming languages you know of. Use
-`.forEach` to print the message `"${programmingLanguage} is a programming
-language!"`, replacing `programmingLanguage` with one of the languages in your
-array.
+`.forEach` to print the message
+`"${programmingLanguage} is a programming language!"`, replacing
+`${programmingLanguage}` with one of the languages in your array.
 
+<!--
 #### Return Value
 
 When using any function or method, it is important to keep in mind the return
 value that it will output. With `forEach`, the return value is `undefined`. As
-such, we should use `forEach` when we want to *use* each item in an array to
-produce some *side effect*, but **not** to produce a new version of the array.
+such, we should use `forEach` when we want to _use_ each item in an array to
+produce some _side effect_, but **not** to produce a new version of the array.
 
 For example, this would be a misuse of `forEach`:
 
 ```js
-let letters = ['a', 'b', 'c']
-let capLetters = letters.forEach((letter) => {
+let letters = ["a", "b", "c"]
+let capLetters = letters.forEach(letter => {
   return letter.toUpperCase() //this return is pointless
 })
 console.log(capLetters)
 // => undefined
+console.log(letters)
+// ["A", "B", "C"]
+```
+-->
+
+Let's step up the `.forEach` example a bit.
+
+Using the same list of words, let's create a new list of uppercased words.
+
+```js
+let newWords = []
+words.forEach(word => {
+  let uppercased = word.toUpperCase()
+  newWords.push(uppercased)
+})
+
+console.log(newWords)
+// ​​​​​[ 'HELLO', 'THIS', 'IS', 'A', 'STICKUP', 'GIMME', 'YOUR', 'WALLET' ]​​​​​
 ```
 
-If we wanted to create a new, modified version of an array, we would use
-`map`.
+Cool, so we can iterate through a list of words and create a new list from it,
+but the example is still a bit rough. We don't like creating functions that have
+**side effects** because it's bad practice.
 
-#### .map() (10 minutes / 0:45)
+There's a much cleaner way. We can create a new, modified version of an array,
+without affecting the old array.
+
+Enter the `map` function.
+
+
+## Break
+
+#### .map() (20 minutes / 1:10)
 
 We've discussed functions that were called for their **side effect** versus
 functions that are called for their **return value** or **output**. In the
-previous example, we used `forEach` to produce some *side effect*.
+previous example, we used `forEach` to produce some _side effect_.
 
 Frequently, however, rather than do **something with each** item in an array, we
 want to do **something to each** item, applying some transformation and
 producing a new, modified version of the array.
 
-`forEach` has a closely related sibling `map` that instead of calling a passed
-function for its effect, it calls a passed function for its return value and
-creates a new array of the return values.
+`forEach` has a closely related sibling `map`. The only difference between the
+two is that you **must always return something from map**.
 
-Let's write a loop to create an array called `instructorNames` that will be an
-array of 6 strings, the instructor names.
+Using the same `words` array from before, let's do the same transformation (by
+capitalizing each word). Only this time, we'll do it better.
+
+We'll start by writing them separately.
 
 ```js
-const instructorNames = []
-for (let i = 0; i < wdiInstructors.length; i++) {
-  let instructor = wdiInstructors[i]
-  let instructorName = instructor.name.first + ' ' + instructor.name.last
-  instructorNames.push(instructorName)
+function makeUpperCase(word) {
+  let upper = word.toUpperCase()
+  return upper
 }
+
+const uppercaseWords = words.map(makeUpperCase)
+
+console.log(uppercaseWords)
+// ​​​​​[ 'HELLO', 'THIS', 'IS', 'A', 'STICKUP', 'GIMME', 'YOUR', 'WALLET' ]
 ```
 
-Similar to the process before, let's abstract the block of code in the `for`
-loop into a function, and call it `getFullName`:
+Lovely! So let's refactor it now.
 
 ```js
-function getFullName (instructor) {
-  return instructor.name.first + ' ' + instructor.name.last
-}
-```
-
-Next, we'll write a loop that calls this function on each instructor in the
-array and stores the results in the `instructorNames` array:
-
-```js
-const instructorNames = []
-for (let i = 0; i < wdiInstructors.length; i++) {
-  let fullName = getFullName(wdiInstructors[i])
-  instructorNames.push(fullName)
-}
-```
-
-Now, instead of using a `for` loop to populate an external array (side effect),
-let's use the `map` array method to create a new array using `map`'s **return
-value**:
-
-```js
-const instructorNames = wdiInstructors.map(getFullName)
-```
-
-We can also use an anonymous function instead of a named one:
-
-```js
-const instructorNames = wdiInstructors.map((instructor) => {
-  return instructor.name.first + ' ' + instructor.name.last
+const uppercaseWords = words.map(function(word) {
+  let upper = word.toUpperCase()
+  return upper
 })
 ```
 
-#### Return Value
+We can condense it even further, by making it into an arrow function and moving
+the logic all into one line.
 
-`map` will return an array that is composed of the **return values** of the
-function given when called with each item of the array passed in as an argument.
+```js
+const uppercaseWords = words.map(word => {
+  return word.toUpperCase()
+})
+```
 
-#### Practicing with Map (15 min, 1:00)
+Finally, let's rely on the implicit return of arrow functions for some truly
+beautiful code.
+
+```js
+const uppercaseWords = words.map(word => word.toUpperCase())
+```
+
+Map is truly the greatest.
+
+### You do: mapping the numbers (5 min / 1:15)
+
+Using the array of numbers provided below, write a map function that squares
+each number (multiplies it by itself). You should end up with another array of
+equal length.
+
+```js
+const numbers = [
+  15,
+  18,
+  3921,
+  327,
+  88,
+  1235,
+  1,
+  55855,
+  34,
+  5,
+  9,
+  9019,
+  156,
+  874,
+  76,
+  444,
+  12346
+]
+```
+
+### Break (10 min / 1:25)
+
+#### Practicing with Map (15 min, 1:40)
 
 (10 min, 5 Review)
 
 [CodeWars](https://www.codewars.com/kata/coding-meetup-number-2-higher-order-functions-series-greet-developers)
 
-## Break (10 min / 1:10)
 
-### Filter (10 minutes / 1:20)
+### Filter (20 minutes / 2:00)
 
 Another common procedure is to filter elements from an array based on some
 custom condition.
 
-The condition will take the form of a function that will return `true` or
-`false` when given an element from the collection.
+The condition must return true or false. If it returns true, the element 
+is kept and stored in the new array. If false, it's skipped.
+
+Use the numbers array above for this exercise.
 
 First we'll write the filter function (the custom condition):
 
 ```js
-function teachesWDI21(instructor) {
-  return instructor.cohort === 21
+function greaterThan100(num) {
+  return num > 100
 }
 ```
 
 We can write a loop that uses this function:
 
 ```js
-const wdi21 = []
-for (let i = 0;  i < wdiInstructors.length; i++) {
-  if (teachesWDI21(wdiInstructors[i])) {
-    wdi21.push(wdiInstructors[i])
+const bigNums = []
+for (let i = 0; i < numbers.length; i++) {
+  if (greaterThan100(numbers[i])) {
+    bigNums.push(numbers[i])
   }
 }
 ```
@@ -409,23 +417,24 @@ for (let i = 0;  i < wdiInstructors.length; i++) {
 Like `.map()` and `.forEach()`, `.filter()` is available directly on arrays:
 
 ```js
-const wdi21two = wdiInstructors.filter(teachesWDI21)
+const bigNums = numbers.filter(greaterThan100)
 ```
 
 Or using an anonymous function:
 
 ```js
-const wdi21three = wdiInstructors.filter((instructor) => {
-  return instructor.cohort === 21
+const bigNums = numbers.filter(num => {
+  return num > 100
 })
 ```
 
 #### Return Value
 
-`filter` will return a new array composed of items for which the
-passed in function **returns true** when called on each item.
+`filter` will return a new array composed of items for which the passed in
+function **returns true** when called on each item.
 
-#### Practice (15 minutes / 1:35)
+#### Practice with Arrays of Objects (15 minutes / 2:15)
+
 > (10 minutes working / 5 minutes discussing)
 
 Use either your `script.js` file you've been working in or open
@@ -433,23 +442,26 @@ Use either your `script.js` file you've been working in or open
 
 - Declare a variable `states`.
 - Assign to it the array of objects from `capitals.json` in this repo.
-   > ⌘+A: Select All, copy & paste
-- Using the array iteration methods we were just looking at, create the following values (keep track of your answers)
+  > ⌘+A: Select All, copy & paste
+- Using the array iteration methods we were just looking at, create the
+  following values (keep track of your answers)
 
-1. Create an array of strings for each capital with the city and state name (e.g. `'Austin, Texas'`)
+1. Create an array of strings for each capital with the city and state name
+   (e.g. `'Austin, Texas'`)
 2. Filter all the states with capitals that start with the letter `A`.
 3. List all the states with two words in their name.
 
+<!-- 
 #### Code Challenge (10 minutes / 1:45)
 
 [Codewars](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe)
 
-## Break (10 minutes / 01:55)
+## Break (10 minutes / 01:55) -->
 
-### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (15 minutes / 02:10)
+### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (15 minutes / 2:30)
 
 The most flexible array method function is called `reduce`. Reduce, as the name
-implies, can take an array and reduce it to fewer things. However, since it is
+implies, can take an array and reduce it to a single value. However, since it is
 the most flexible of the array iteration methods, it can implement the
 functionality of `map`, `filter`, `forEach`, etc.
 
@@ -460,8 +472,8 @@ early awareness. It takes a fair amount of practice to intuitively use
 
 #### Example
 
-We can take the sum of an array of numbers (i.e. reduce the set of numbers to
-a sum):
+We can take the sum of an array of numbers (i.e. reduce the set of numbers to a
+sum):
 
 ```js
 const total = [1, 3, 5, 7].reduce((sum, num) => sum + num, 0)
@@ -470,9 +482,9 @@ const total = [1, 3, 5, 7].reduce((sum, num) => sum + num, 0)
 Mapping with reduce:
 
 ```js
-const instructorNames5 = wdiInstructors.reduce((names, instructor) => {
-  names.push(instructor.name.first + ' ' + instructor.name.last)
-  return names
+const stickup = words.reduce((instructions, word) => {
+  instructions.push(word.toUpperCase())
+  return instructions
 }, [])
 ```
 
@@ -498,34 +510,18 @@ const numEvens = [1, 2, 3, 4, 5, 6, 7].reduce((count, num) => {
 }, 0)
 ```
 
-#### Histogram
+For a step by step of how the mechanics work, check out
+[this section on the MDN page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works).
 
-For a step by step of how the mechanics work, check out [this section on the MDN
-page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works).
 
-```js
-const names = ['Tabitha', 'Jimothy', 'Toad', 'Tabitha', 'Bertha']
-
-const histogramObject = names.reduce((histogram, name) => { 
-  if (histogram[name]) {
-    histogram[name]++
-  } else {
-    histogram[name] = 1
-  }
-  return histogram
-}, {})
-// histogramObject is:
-// { 'Tabitha': 2, 'Jimothy': 1, 'Toad': 1, 'Bertha': 1 }
-```
-
-#### Sort (10 minutes / 2:20)
+#### Bonus: Sort (10 minutes / 2:20)
 
 The `sort` method is another higher-order function.
 
 If no input function is supplied, values are sorted as strings by default.
 
 ```js
-['chips', 'salsa', 'guacamole', 'cheese', 'jalapenos', 'sour cream'].sort()
+["chips", "salsa", "guacamole", "cheese", "jalapenos", "sour cream"].sort()
 // => [ 'cheese', 'chips', 'guacamole', 'jalapenos', 'salsa', 'sour cream' ]
 ```
 
@@ -552,16 +548,18 @@ of the compare function:
 - return a positive number if `a` should come after `b`
 
 ```js
-function compareNumbers(a,b) {
+function compareNumbers(a, b) {
   return a - b
 }
 
+let array = [111, 2, 10, 20, 3, -1, 12]
+
 // with a named function
-[111, 2, 10, 20, 3, -1, 12].sort(compareNumbers)
+array.sort(compareNumbers)
 // => [-1, 1, 2, 3, 10, 12, 20]
 
 // with an anonymous function
-[111, 2, 10, 20, 3, -1, 12].sort((a, b) => a - b)
+array.sort((a, b) => a - b)
 // => [-1, 1, 2, 3, 10, 12, 20]
 ```
 
@@ -582,13 +580,16 @@ Callbacks passed to another function to be called at some later time.
 All the examples that we have looked at use the function being passed as an
 argument immediately (and repeatedly).
 
-Callbacks are generally called at some time in the future.  What types of things
+Callbacks are generally called at some time in the future. What types of things
 might we want to trigger a function call on?
 
 ### Review and Questions (5 minutes / 2:30)
 
-- Check out the [Coding Meetup Kata's](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe) for lots more practice
-- [Node School Workshoppers](https://nodeschool.io/#workshoppers) (Functional JavaScript elective)
+- Check out the
+  [Coding Meetup Kata's](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe)
+  for lots more practice
+- [Node School Workshoppers](https://nodeschool.io/#workshoppers) (Functional
+  JavaScript elective)
 - [Eloquent JS Higher-Order Functions](http://eloquentjavascript.net/05_higher_order.html)
 
 #### Review
