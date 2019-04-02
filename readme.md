@@ -87,22 +87,12 @@ Functions always return a value, either...
    `undefined`.
 
 ```js
-// in a repl
+// in a repl, like the chrome console
 console.log("hello!")
 // 'hello!'
 // => undefined
 //// console.log() returns `undefined`, which appears below the console-logged message
 ```
-
-
-### CodeWars Sign Up
-
-For our in-class exercises today, you will need an account on
-[CodeWars](https://www.codewars.com). You'll have to pass one small challenge
-before you can create your account, but the good news is that we just covered
-it. If you already have a CodeWars account, then you've already completed this
-step.
-
 
 ### Functions as Values (5 minutes / 0:20)
 
@@ -118,7 +108,8 @@ The impact of this is we can:
 > Open up a [repl.it](https://repl.it/languages/javascript) and see for
 > yourself!
 
-> 1. Create an array and add a function to it. How do you invoke it?
+> 1. Create an array and add a function to it in the first index. How do you
+>    invoke it?
 > 1. Create a function that takes a function as an argument. How do you invoke
 >    it?
 > 1. Create a function that returns another function. How do you invoke them?
@@ -166,8 +157,7 @@ Without higher-order functions, we would need to use a loop to perform this task
 
 ```js
 for (let i = 0; i < words.length; i++) {
-  let word = words[i]
-  console.log(word)
+  console.log(words[i])
 }
 ```
 
@@ -184,6 +174,10 @@ And then rewrite the loop to call this function and pass in each instructor
 object as an argument...
 
 ```js
+function printWord(word) {
+  console.log(word)
+}
+
 for (let i = 0; i < words.length; i++) {
   printWord(words[i])
 }
@@ -237,8 +231,8 @@ words.forEach(word => {
 
 #### You Do: `.forEach` ( 5 minutes / 0:50)
 
-In your `script.js`, create an array of programming languages you know of. Use
-`.forEach` to print the message
+In your `script.js`, create an array of programming languages you've heard of.
+Use `.forEach` to print the message
 `"${programmingLanguage} is a programming language!"`, replacing
 `${programmingLanguage}` with one of the languages in your array.
 
@@ -283,11 +277,13 @@ Cool, so we can iterate through a list of words and create a new list from it,
 but the example is still a bit rough. We don't like creating functions that have
 **side effects** because it's bad practice.
 
+> When a function changes or affects something outside of itself, it's
+> considered a side-effect.
+
 There's a much cleaner way. We can create a new, modified version of an array,
 without affecting the old array.
 
 Enter the `map` function.
-
 
 ## Break
 
@@ -301,8 +297,9 @@ Frequently, however, rather than do **something with each** item in an array, we
 want to do **something to each** item, applying some transformation and
 producing a new, modified version of the array.
 
-`forEach` has a closely related sibling `map`. The only difference between the
-two is that you **must always return something from map**.
+`forEach` has a closely related sibling called `map`. The only difference
+between the two is that you **must always return something from map**. In
+`forEach`, returning anything is pointless.
 
 Using the same `words` array from before, let's do the same transformation (by
 capitalizing each word). Only this time, we'll do it better.
@@ -384,14 +381,13 @@ const numbers = [
 
 [CodeWars](https://www.codewars.com/kata/coding-meetup-number-2-higher-order-functions-series-greet-developers)
 
-
 ### Filter (20 minutes / 2:00)
 
 Another common procedure is to filter elements from an array based on some
 custom condition.
 
-The condition must return true or false. If it returns true, the element 
-is kept and stored in the new array. If false, it's skipped.
+The condition must return true or false. If it returns true, the element is kept
+and stored in the new array. If false, it's skipped.
 
 Use the numbers array above for this exercise.
 
@@ -451,13 +447,6 @@ Use either your `script.js` file you've been working in or open
 2. Filter all the states with capitals that start with the letter `A`.
 3. List all the states with two words in their name.
 
-<!-- 
-#### Code Challenge (10 minutes / 1:45)
-
-[Codewars](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe)
-
-## Break (10 minutes / 01:55) -->
-
 ### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (15 minutes / 2:30)
 
 The most flexible array method function is called `reduce`. Reduce, as the name
@@ -492,7 +481,8 @@ Filtering even numbers:
 
 ```js
 const odds = [1, 2, 3, 4, 5, 6, 7].reduce((odds, num) => {
-  if (num % 2) { // false if num % 2 === 0
+  if (num % 2) {
+    // false if num % 2 === 0
     odds.push(num)
   }
   return odds
@@ -503,7 +493,8 @@ Or count even numbers:
 
 ```js
 const numEvens = [1, 2, 3, 4, 5, 6, 7].reduce((count, num) => {
-  if (!(num % 2)) { // false if num % 2 !== 0
+  if (!(num % 2)) {
+    // false if num % 2 !== 0
     count++
   }
   return count
@@ -512,7 +503,6 @@ const numEvens = [1, 2, 3, 4, 5, 6, 7].reduce((count, num) => {
 
 For a step by step of how the mechanics work, check out
 [this section on the MDN page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works).
-
 
 #### Bonus: Sort (10 minutes / 2:20)
 
