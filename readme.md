@@ -114,6 +114,7 @@ The impact of this is we can:
 <details>
 <summary>Example</summary>
 <code>
+```javascript
 let arr = [
   1,
   function() {
@@ -124,6 +125,7 @@ let arr = [
 ];
 
 console.log(arr[1]());
+
 </code>
 
 </details>
@@ -131,7 +133,39 @@ console.log(arr[1]());
 > 2. Create a function that takes a function as an argument. How do you invoke
 >    it?
 
+<details>
+<summary>Example</summary>
+<code>
+function whatShouldISay(func) {
+  return func();
+}
+
+function sayHello() {
+return 'Hello!!!!';
+}
+
+console.log(whatShouldISay(sayHello));
+</code>
+
+</details>
+
 > 3. Create a function that returns another function. How do you invoke them?
+
+<details>
+<summary>Example</summary>
+<code>
+function helloWorld() {
+  return 'Hello World';
+}
+
+function sayHello() {
+return helloWorld();
+}
+
+console.log(sayHello());
+</code>
+
+</details>
 
 Taking functions as arguments and returning functions is a little advanced, so
 we're just going to touch on it today. But the significance is: a function that
