@@ -7,7 +7,7 @@
 -   Describe the uses of `forEach`, `map`, `filter`, and `reduce`
 -   Define `every` and `some`
 
-## Framing & Review (15 min / 0:15)
+## Framing & Review
 
 Today we will cover some array methods which are used to transform arrays. This
 could be as simple as multiplying each number in an array of numbers by a
@@ -94,7 +94,7 @@ console.log('hello!');
 //// console.log() returns `undefined`, which appears below the console-logged message
 ```
 
-### Functions as Values (5 minutes / 0:20)
+### Functions as Values
 
 One of the things that makes JavaScript so powerful is that we can reference
 functions and treat them like values stored in a variable.
@@ -131,7 +131,7 @@ that take a function as an argument and use it to transform an array of data.
 The purpose is to provide a level of abstraction and simplify array iteration
 (going through each element in an array and performing some operation).
 
-### Passing Functions to Functions (5 minutes / 0:25)
+### Passing Functions to Functions
 
 In order to explore some of the higher-order functions JavaScript provides,
 let's set up a simple development environment:
@@ -157,7 +157,7 @@ const words = [
 ];
 ```
 
-### .forEach() (20 minutes / :45)
+### .forEach()
 
 Very frequently, we will want to go through an array and do something for every
 element in the array.
@@ -242,7 +242,7 @@ words.forEach(word => {
 });
 ```
 
-#### You Do: `.forEach` ( 5 minutes / 0:50)
+#### You Do: `.forEach`
 
 In your `script.js`, create an array of programming languages you've heard of.
 Use `.forEach` to print the message
@@ -300,7 +300,7 @@ Enter the `map` function.
 
 ## Break
 
-#### .map() (20 minutes / 1:10)
+#### .map()
 
 We've discussed functions that were called for their **side effect** versus
 functions that are called for their **return value** or **output**. In the
@@ -358,7 +358,7 @@ const uppercaseWords = words.map(word => word.toUpperCase());
 
 Map is truly the greatest.
 
-### You do: mapping the numbers (5 min / 1:15)
+### You do: mapping the numbers
 
 Using the array of numbers provided below, write a map function that squares
 each number (multiplies it by itself). You should end up with another array of
@@ -386,15 +386,9 @@ const numbers = [
 ];
 ```
 
-### Break (10 min / 1:25)
+### Break
 
-#### Practicing with Map (15 min, 1:40)
-
-(10 min, 5 Review)
-
-[CodeWars](https://www.codewars.com/kata/coding-meetup-number-2-higher-order-functions-series-greet-developers)
-
-### Filter (20 minutes / 2:00)
+### Filter
 
 Another common procedure is to filter elements from an array based on some
 custom condition.
@@ -442,9 +436,7 @@ const bigNums = numbers.filter(num => {
 `filter` will return a new array composed of items for which the passed in
 function **returns true** when called on each item.
 
-#### Practice with Arrays of Objects (15 minutes / 2:15)
-
-> (10 minutes working / 5 minutes discussing)
+#### Practice with Arrays of Objects
 
 Use either your `script.js` file you've been working in or open
 [repl.it](https://repl.it/languages/javascript).
@@ -586,17 +578,15 @@ argument immediately (and repeatedly).
 Callbacks are generally called at some time in the future. What types of things
 might we want to trigger a function call on?
 
-### Review and Questions (5 minutes / 2:30)
+### Practice On Your Own:
 
--   Check out the
-    [Coding Meetup Kata's](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe)
+-   Minions Callback Array Methods [Lab](https://git.generalassemb.ly/seir-129/callback-array-methods-lab)
+
+-   Need a challenge? Try this [CodeWars](https://www.codewars.com/kata/coding-meetup-number-2-higher-order-functions-series-greet-developers) kata that covers array methods that use higher-order functions.
+
+-   Also check out the rest of the
+    [Coding Meetup Katas](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe)
     for lots more practice
 -   [Node School Workshoppers](https://nodeschool.io/#workshoppers) (Functional
     JavaScript elective)
 -   [Eloquent JS Higher-Order Functions](http://eloquentjavascript.net/05_higher_order.html)
-
-#### Review
-
--   What is the difference between output and a side effect?
--   What is the difference between an argument and a parameter?
--   What is the difference between referencing and invoking a function?
