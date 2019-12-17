@@ -249,7 +249,6 @@ Use `.forEach` to print the message
 `"${programmingLanguage} is a programming language!"`, replacing
 `${programmingLanguage}` with one of the languages in your array.
 
-<!--
 #### Return Value
 
 When using any function or method, it is important to keep in mind the return
@@ -260,16 +259,15 @@ produce some _side effect_, but **not** to produce a new version of the array.
 For example, this would be a misuse of `forEach`:
 
 ```js
-let letters = ["a", "b", "c"]
+let letters = ['a', 'b', 'c'];
 let capLetters = letters.forEach(letter => {
-  return letter.toUpperCase() //this return is pointless
-})
-console.log(capLetters)
+	return letter.toUpperCase(); //this return is pointless
+});
+console.log(capLetters);
 // => undefined
-console.log(letters)
+console.log(letters);
 // ["A", "B", "C"]
 ```
--->
 
 Let's step up the `.forEach` example a bit.
 
@@ -452,7 +450,7 @@ Use either your `script.js` file you've been working in or open
 2. Filter all the states with capitals that start with the letter `A`.
 3. List all the states with two words in their name.
 
-### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (15 minutes / 2:30)
+### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
 
 The most flexible array method function is called `reduce`. Reduce, as the name
 implies, can take an array and reduce it to a single value. However, since it is
@@ -509,7 +507,7 @@ const numEvens = [1, 2, 3, 4, 5, 6, 7].reduce((count, num) => {
 For a step by step of how the mechanics work, check out
 [this section on the MDN page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works).
 
-#### Bonus: Sort (10 minutes / 2:20)
+#### Bonus: Sort
 
 The `sort` method is another higher-order function.
 
@@ -561,7 +559,7 @@ array.sort((a, b) => a - b);
 How would we write a compare function to sort our capitals from most northern to
 most southern?
 
-### Looking Forward: Callbacks (5 minutes / 2:25)
+### Looking Forward: Callbacks
 
 While array iteration methods are a very common example of higher-order
 functions, an even more common time that we want to pass functions as arguments
