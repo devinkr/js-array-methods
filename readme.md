@@ -166,9 +166,8 @@ console.log(sayHello());
 </details>
 
 <br>
-Taking functions as arguments and returning functions is a little advanced, so
-we're just going to touch on it today. But the significance is: a function that
-takes a function as an argument is called a _higher-order function._ The function that it takes is called a _callback function_.
+
+Taking functions as arguments and returning functions is a little advanced, so we're just going to touch on it today. But the significance is: a function that takes a function as an argument is called a _higher-order function._ The function that it takes is called a _callback function_.
 
 ## Higher-Order Functions
 
