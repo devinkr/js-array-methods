@@ -2,10 +2,10 @@
 
 ## Learning Objectives
 
-- Define higher-order functions
-- Use higher-order functions to iterate over arrays
-- Describe the uses of `forEach`, `map`, `filter`, and `reduce`
-- Define `every` and `some`
+-   Define higher-order functions
+-   Use higher-order functions to iterate over arrays
+-   Describe the uses of `forEach`, `map`, `filter`, and `reduce`
+-   Define `every` and `some`
 
 ## Framing & Review (15 min / 0:15)
 
@@ -42,10 +42,10 @@ describe some thing or entity with various attributes.
 
 What is a function?
 
-- Defined block of code that can be called by later code
-- Functions are defined with zero or more **parameters**
-  - **Parameters** are the variables for the function inputs upon definition
-  - **Arguments** are the values passed in to the function when it is called
+-   Defined block of code that can be called by later code
+-   Functions are defined with zero or more **parameters**
+    -   **Parameters** are the variables for the function inputs upon definition
+    -   **Arguments** are the values passed in to the function when it is called
 
 <details>
   <summary> What is a method? </summary>
@@ -56,8 +56,8 @@ What is a function?
 
 ```js
 function sum(a, b) {
-  // function "sum" defined with parameters a and b
-  return a + b
+	// function "sum" defined with parameters a and b
+	return a + b;
 }
 ```
 
@@ -66,17 +66,17 @@ function sum(a, b) {
 ```js
 // ES5 Style
 var sum = function(a, b) {
-  return a + b
-}
+	return a + b;
+};
 
 // ES6 Style, with Arrow Functions
-const sum = (a, b) => a + b
+const sum = (a, b) => a + b;
 ```
 
 #### Function Invocation (calling a function)
 
 ```js
-sum(3, 4) // function "sum" called with arguments a and b
+sum(3, 4); // function "sum" called with arguments a and b
 // => 7
 ```
 
@@ -88,7 +88,7 @@ Functions always return a value, either...
 
 ```js
 // in a repl, like the chrome console
-console.log("hello!")
+console.log('hello!');
 // 'hello!'
 // => undefined
 //// console.log() returns `undefined`, which appears below the console-logged message
@@ -101,17 +101,19 @@ functions and treat them like values stored in a variable.
 
 The impact of this is we can:
 
-- add functions to arrays and objects, just like any other value
-- pass functions as arguments to another function
-- return a function from a function
+-   add functions to arrays and objects, just like any other value
+-   pass functions as arguments to another function
+-   return a function from a function
 
 > Open up a [repl.it](https://repl.it/languages/javascript) and see for
 > yourself!
 
 > 1. Create an array and add a function to it in the first index. How do you
 >    invoke it?
+
 > 1. Create a function that takes a function as an argument. How do you invoke
 >    it?
+
 > 1. Create a function that returns another function. How do you invoke them?
 
 Taking functions as arguments and returning functions is a little advanced, so
@@ -119,6 +121,8 @@ we're just going to touch on it today. But the significance is: a function that
 takes a function as an argument is called a _higher-order function._
 
 ## Higher-Order Functions
+
+![What if I told you](morpheus.png)
 
 Functions that take other functions as arguments or return them as output are
 called **higher-order functions**. The array methods that we're going to learn
@@ -141,7 +145,16 @@ let's set up a simple development environment:
 We'll use the following array for the next few examples:
 
 ```js
-const words = ["hello", "this", "is", "a", "stickup", "gimme", "your", "wallet"]
+const words = [
+	'hello',
+	'this',
+	'is',
+	'a',
+	'stickup',
+	'gimme',
+	'your',
+	'wallet'
+];
 ```
 
 ### .forEach() (20 minutes / :45)
@@ -157,7 +170,7 @@ Without higher-order functions, we would need to use a loop to perform this task
 
 ```js
 for (let i = 0; i < words.length; i++) {
-  console.log(words[i])
+	console.log(words[i]);
 }
 ```
 
@@ -166,7 +179,7 @@ each instructor object:
 
 ```js
 function printWord(word) {
-  console.log(word)
+	console.log(word);
 }
 ```
 
@@ -175,11 +188,11 @@ object as an argument...
 
 ```js
 function printWord(word) {
-  console.log(word)
+	console.log(word);
 }
 
 for (let i = 0; i < words.length; i++) {
-  printWord(words[i])
+	printWord(words[i]);
 }
 ```
 
@@ -190,10 +203,10 @@ and replace it with a `forEach`.
 
 ```js
 function printWord(word) {
-  console.log(word)
+	console.log(word);
 }
 
-words.forEach(printWord)
+words.forEach(printWord);
 ```
 
 > Note that here we are _referencing_ the `printWord` function, not invoking it.
@@ -212,8 +225,8 @@ this:
 
 ```js
 words.forEach(function(word) {
-  console.log(word)
-})
+	console.log(word);
+});
 ```
 
 > Note that this is functionally no different than the above code snippet, only
@@ -225,8 +238,8 @@ common form you'll see of these functions:
 
 ```js
 words.forEach(word => {
-  console.log(word)
-})
+	console.log(word);
+});
 ```
 
 #### You Do: `.forEach` ( 5 minutes / 0:50)
@@ -263,13 +276,13 @@ Let's step up the `.forEach` example a bit.
 Using the same list of words, let's create a new list of uppercased words.
 
 ```js
-let newWords = []
+let newWords = [];
 words.forEach(word => {
-  let uppercased = word.toUpperCase()
-  newWords.push(uppercased)
-})
+	let uppercased = word.toUpperCase();
+	newWords.push(uppercased);
+});
 
-console.log(newWords)
+console.log(newWords);
 // ​​​​​[ 'HELLO', 'THIS', 'IS', 'A', 'STICKUP', 'GIMME', 'YOUR', 'WALLET' ]​​​​​
 ```
 
@@ -308,13 +321,13 @@ We'll start by writing them separately.
 
 ```js
 function makeUpperCase(word) {
-  let upper = word.toUpperCase()
-  return upper
+	let upper = word.toUpperCase();
+	return upper;
 }
 
-const uppercaseWords = words.map(makeUpperCase)
+const uppercaseWords = words.map(makeUpperCase);
 
-console.log(uppercaseWords)
+console.log(uppercaseWords);
 // ​​​​​[ 'HELLO', 'THIS', 'IS', 'A', 'STICKUP', 'GIMME', 'YOUR', 'WALLET' ]
 ```
 
@@ -322,9 +335,9 @@ Lovely! So let's refactor it now.
 
 ```js
 const uppercaseWords = words.map(function(word) {
-  let upper = word.toUpperCase()
-  return upper
-})
+	let upper = word.toUpperCase();
+	return upper;
+});
 ```
 
 We can condense it even further, by making it into an arrow function and moving
@@ -332,15 +345,15 @@ the logic all into one line.
 
 ```js
 const uppercaseWords = words.map(word => {
-  return word.toUpperCase()
-})
+	return word.toUpperCase();
+});
 ```
 
 Finally, let's rely on the implicit return of arrow functions for some truly
 beautiful code.
 
 ```js
-const uppercaseWords = words.map(word => word.toUpperCase())
+const uppercaseWords = words.map(word => word.toUpperCase());
 ```
 
 Map is truly the greatest.
@@ -353,24 +366,24 @@ equal length.
 
 ```js
 const numbers = [
-  15,
-  18,
-  3921,
-  327,
-  88,
-  1235,
-  1,
-  55855,
-  34,
-  5,
-  9,
-  9019,
-  156,
-  874,
-  76,
-  444,
-  12346
-]
+	15,
+	18,
+	3921,
+	327,
+	88,
+	1235,
+	1,
+	55855,
+	34,
+	5,
+	9,
+	9019,
+	156,
+	874,
+	76,
+	444,
+	12346
+];
 ```
 
 ### Break (10 min / 1:25)
@@ -395,33 +408,33 @@ First we'll write the filter function (the custom condition):
 
 ```js
 function greaterThan100(num) {
-  return num > 100
+	return num > 100;
 }
 ```
 
 We can write a loop that uses this function:
 
 ```js
-const bigNums = []
+const bigNums = [];
 for (let i = 0; i < numbers.length; i++) {
-  if (greaterThan100(numbers[i])) {
-    bigNums.push(numbers[i])
-  }
+	if (greaterThan100(numbers[i])) {
+		bigNums.push(numbers[i]);
+	}
 }
 ```
 
 Like `.map()` and `.forEach()`, `.filter()` is available directly on arrays:
 
 ```js
-const bigNums = numbers.filter(greaterThan100)
+const bigNums = numbers.filter(greaterThan100);
 ```
 
 Or using an anonymous function:
 
 ```js
 const bigNums = numbers.filter(num => {
-  return num > 100
-})
+	return num > 100;
+});
 ```
 
 #### Return Value
@@ -436,11 +449,11 @@ function **returns true** when called on each item.
 Use either your `script.js` file you've been working in or open
 [repl.it](https://repl.it/languages/javascript).
 
-- Declare a variable `states`.
-- Assign to it the array of objects from `capitals.json` in this repo.
-  > ⌘+A: Select All, copy & paste
-- Using the array iteration methods we were just looking at, create the
-  following values (keep track of your answers)
+-   Declare a variable `states`.
+-   Assign to it the array of objects from `capitals.json` in this repo.
+    > ⌘+A: Select All, copy & paste
+-   Using the array iteration methods we were just looking at, create the
+    following values (keep track of your answers)
 
 1. Create an array of strings for each capital with the city and state name
    (e.g. `'Austin, Texas'`)
@@ -465,40 +478,40 @@ We can take the sum of an array of numbers (i.e. reduce the set of numbers to a
 sum):
 
 ```js
-const total = [1, 3, 5, 7].reduce((sum, num) => sum + num, 0)
+const total = [1, 3, 5, 7].reduce((sum, num) => sum + num, 0);
 ```
 
 Mapping with reduce:
 
 ```js
 const stickup = words.reduce((instructions, word) => {
-  instructions.push(word.toUpperCase())
-  return instructions
-}, [])
+	instructions.push(word.toUpperCase());
+	return instructions;
+}, []);
 ```
 
 Filtering even numbers:
 
 ```js
 const odds = [1, 2, 3, 4, 5, 6, 7].reduce((odds, num) => {
-  if (num % 2) {
-    // false if num % 2 === 0
-    odds.push(num)
-  }
-  return odds
-}, [])
+	if (num % 2) {
+		// false if num % 2 === 0
+		odds.push(num);
+	}
+	return odds;
+}, []);
 ```
 
 Or count even numbers:
 
 ```js
 const numEvens = [1, 2, 3, 4, 5, 6, 7].reduce((count, num) => {
-  if (!(num % 2)) {
-    // false if num % 2 !== 0
-    count++
-  }
-  return count
-}, 0)
+	if (!(num % 2)) {
+		// false if num % 2 !== 0
+		count++;
+	}
+	return count;
+}, 0);
 ```
 
 For a step by step of how the mechanics work, check out
@@ -511,7 +524,7 @@ The `sort` method is another higher-order function.
 If no input function is supplied, values are sorted as strings by default.
 
 ```js
-["chips", "salsa", "guacamole", "cheese", "jalapenos", "sour cream"].sort()
+['chips', 'salsa', 'guacamole', 'cheese', 'jalapenos', 'sour cream'].sort();
 // => [ 'cheese', 'chips', 'guacamole', 'jalapenos', 'salsa', 'sour cream' ]
 ```
 
@@ -522,7 +535,7 @@ lower case characters).
 This leads to the odd behavior of `10` being sorted in front of `2`...
 
 ```js
-[111, 2, 10, 20, 3, -1, 12].sort()
+[111, 2, 10, 20, 3, -1, 12].sort();
 // => [-1, 10, 111, 12, 2, 20, 3]
 ```
 
@@ -533,23 +546,23 @@ Rather than returning `true` or `false` as in the case of the other test
 functions we've looked at, the elements are sorted according to the return value
 of the compare function:
 
-- return a negative number if `a` should come before `b`
-- return 0 if `a` and `b` are equal
-- return a positive number if `a` should come after `b`
+-   return a negative number if `a` should come before `b`
+-   return 0 if `a` and `b` are equal
+-   return a positive number if `a` should come after `b`
 
 ```js
 function compareNumbers(a, b) {
-  return a - b
+	return a - b;
 }
 
-let array = [111, 2, 10, 20, 3, -1, 12]
+let array = [111, 2, 10, 20, 3, -1, 12];
 
 // with a named function
-array.sort(compareNumbers)
+array.sort(compareNumbers);
 // => [-1, 1, 2, 3, 10, 12, 20]
 
 // with an anonymous function
-array.sort((a, b) => a - b)
+array.sort((a, b) => a - b);
 // => [-1, 1, 2, 3, 10, 12, 20]
 ```
 
@@ -575,15 +588,15 @@ might we want to trigger a function call on?
 
 ### Review and Questions (5 minutes / 2:30)
 
-- Check out the
-  [Coding Meetup Kata's](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe)
-  for lots more practice
-- [Node School Workshoppers](https://nodeschool.io/#workshoppers) (Functional
-  JavaScript elective)
-- [Eloquent JS Higher-Order Functions](http://eloquentjavascript.net/05_higher_order.html)
+-   Check out the
+    [Coding Meetup Kata's](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe)
+    for lots more practice
+-   [Node School Workshoppers](https://nodeschool.io/#workshoppers) (Functional
+    JavaScript elective)
+-   [Eloquent JS Higher-Order Functions](http://eloquentjavascript.net/05_higher_order.html)
 
 #### Review
 
-- What is the difference between output and a side effect?
-- What is the difference between an argument and a parameter?
-- What is the difference between referencing and invoking a function?
+-   What is the difference between output and a side effect?
+-   What is the difference between an argument and a parameter?
+-   What is the difference between referencing and invoking a function?
