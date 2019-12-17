@@ -91,7 +91,7 @@ Functions always return a value, either...
 console.log('hello!');
 // 'hello!'
 // => undefined
-//// console.log() returns `undefined`, which appears below the console-logged message
+//// console.log() returns `undefined`, which appears below the console-logged message because the console.log() method is not given a RETURN VALUE
 ```
 
 ### Functions as Values
@@ -111,10 +111,27 @@ The impact of this is we can:
 > 1. Create an array and add a function to it in the first index. How do you
 >    invoke it?
 
-> 1. Create a function that takes a function as an argument. How do you invoke
+<details>
+<summary>Example</summary>
+<code>
+let arr = [
+  1,
+  function() {
+    return 'Hello World';
+  },
+  2,
+  3
+];
+
+console.log(arr[1]());
+</code>
+
+</details>
+
+> 2. Create a function that takes a function as an argument. How do you invoke
 >    it?
 
-> 1. Create a function that returns another function. How do you invoke them?
+> 3. Create a function that returns another function. How do you invoke them?
 
 Taking functions as arguments and returning functions is a little advanced, so
 we're just going to touch on it today. But the significance is: a function that
@@ -128,10 +145,13 @@ Functions that take other functions as arguments or return them as output are
 called **higher-order functions**. The array methods that we're going to learn
 today all fit this definition: they are functions (methods of the Array object)
 that take a function as an argument and use it to transform an array of data.
+
+> The function taken as an argument of the higher-order function is called a CALLBACK FUNCTION.
+
 The purpose is to provide a level of abstraction and simplify array iteration
 (going through each element in an array and performing some operation).
 
-### Passing Functions to Functions
+### Passing Callback Functions to Higher Order Functions
 
 In order to explore some of the higher-order functions JavaScript provides,
 let's set up a simple development environment:
@@ -558,23 +578,6 @@ array.sort((a, b) => a - b);
 
 How would we write a compare function to sort our capitals from most northern to
 most southern?
-
-### Looking Forward: Callbacks
-
-While array iteration methods are a very common example of higher-order
-functions, an even more common time that we want to pass functions as arguments
-to other functions is called a callback.
-
-These are ideas we'll cover in depth in a couple of classes but consider the
-following at a high level as a primer.
-
-Callbacks passed to another function to be called at some later time.
-
-All the examples that we have looked at use the function being passed as an
-argument immediately (and repeatedly).
-
-Callbacks are generally called at some time in the future. What types of things
-might we want to trigger a function call on?
 
 ### Practice On Your Own:
 
