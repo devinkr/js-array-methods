@@ -7,6 +7,13 @@
 -   Describe the uses of `forEach`, `map`, `filter`, and `reduce`
 -   Define `every` and `some`
 
+## Instructions
+Let's set up a simple development environment:
+
+1. Create a directory called js-higher-order-functions in your sandbox directory.
+2. Inside of it create an index.html file and a script.js file.
+3. Add boilerplate to index.html, link the script, then add a console.log to the script to make sure everything is wired up properly.
+
 ## Framing & Review
 
 Today we will cover some array methods which are used to transform arrays. This
@@ -188,15 +195,6 @@ The purpose is to provide a level of abstraction and simplify array iteration
 (going through each element in an array and performing some operation).
 
 ### Passing Callback Functions to Higher Order Functions
-
-In order to explore some of the higher-order functions JavaScript provides,
-let's set up a simple development environment:
-
-1. Create a directory called `js-higher-order-functions` in your `sandbox`
-   directory.
-1. Inside of it create an `index.html` file and a `script.js` file.
-1. Add boilerplate to `index.html`, link the script, then add a `console.log` to
-   the script to make sure everything is wired up properly.
 
 We'll use the following array for the next few examples:
 
