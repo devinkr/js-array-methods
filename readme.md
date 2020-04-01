@@ -438,7 +438,38 @@ const numbers = [
 ];
 ```
 
-### Break
+### More Map Practice - Mapping over an array of objects
+
+Taking the array of instructor objects below, create map functions that do the following: 
+```javascript
+const instructors = [
+	{
+		name: 'Hou',
+		location: 'New York City', 
+		likes: ['cats', 'coding', 'yoga']
+	}, 
+	{
+		name: 'Jennifer',
+		location: 'Boston',
+		likes: ['dogs', 'software development', 'piano']
+	}, 
+	{
+		name: 'Carlos',
+		location: 'New Jersey',
+		likes: ['Python', 'teaching', 'web development']
+	},
+	{
+		name: 'Esin',
+		location: 'Austin', 
+		likes: ['coffee', 'tacos', 'Star Trek']
+	}
+]
+```
+- return an array called `greetings` that contains a personalized greeting: 'Hello `name`!' 
+- return an array called `howDoYouLike` that asks how they like their location: 'How do you like `location`?'
+- return an array called `likeBetter` that asks which they like better, their first or second like: 'Do you like `first like` or `second like` better?
+
+**Challenge**: Can you use `.forEach()` to add a greeting property to each instructor that greets them by their name? 
 
 ### Filter
 
