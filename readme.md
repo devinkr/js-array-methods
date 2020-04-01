@@ -5,7 +5,6 @@
 -   Define higher-order functions
 -   Use higher-order functions to iterate over arrays
 -   Describe the uses of `forEach`, `map`, `filter`, and `reduce`
--   Define `every` and `some`
 
 ## Instructions
 Let's set up a simple development environment:
