@@ -52,6 +52,10 @@ What is a function?
   A method is a function that is defined on an object or class. Methods begin with a <code>.</code>, since they are object-properties. For example, <code>.push()</code> and <code>.reverse()</code> are methods, specifically <code>Array</code> methods.
 </details>
 
+### Function Syntax
+
+Remember that functions can be written in several different ways. Learn one way first, but don't let the other ways trip you up! 
+
 #### Function Declaration
 
 ```js
@@ -105,7 +109,7 @@ The impact of this is we can:
 -   pass functions as arguments to another function
 -   return a function from a function
 
-> Open up a [repl.it](https://repl.it/languages/javascript) and see for
+> Open up a [Code Pen](https://codepen.io/pen/) and see for
 > yourself!
 
 > 1. Create an array and add a function to it in the first index. How do you
@@ -347,8 +351,6 @@ There's a much cleaner way. We can create a new, modified version of an array,
 without affecting the old array.
 
 Enter the `map` function.
-
-## Break
 
 #### .map()
 
@@ -613,7 +615,7 @@ most southern?
 
 ### Practice On Your Own:
 
--   Minions Callback Array Methods [Lab](https://git.generalassemb.ly/seir-129/callback-array-methods-lab)
+-   Minions Callback Array Methods [Lab](https://git.generalassemb.ly/seir-323/callback-array-methods-lab)
 
 -   Need a challenge? Try this [CodeWars](https://www.codewars.com/kata/coding-meetup-number-2-higher-order-functions-series-greet-developers) kata that covers array methods that use higher-order functions.
 
