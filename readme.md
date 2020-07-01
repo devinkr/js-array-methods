@@ -165,22 +165,6 @@ const isPositive = (num) => num > 0
 const isPositive = num => num > 0
 ```
 
-### You Try: Converting To Arrow Syntax
-
-Now it's your turn. Convert the function below to use arrow syntax.
-
-```javascript
-// Starting function
-const isEven = function (num) {
-  return num % 2 === 0
-}
-
-console.log('Is 1 even?', isEven(1))
-console.log('Is 2 even?', isEven(2))
-
-// 1. Rewrite the isEven function using arrow syntax.
-```
-
 ### Arrow Function Caveats
 
 Arrow Functions have a few caveats.
@@ -189,9 +173,47 @@ Arrow functions:
 
 - **cannot** be used as a Constructor (`new` does not bind `this`, no
   `prototype` property).
-- always have a lexically bound `this` (we'll learn more about that later).
+<details>
+	<summary>Example</summary>
+	<code>
+const Message = (text) => {
+  this.text = text;
+};
+// Throws "TypeError: Message is not a constructor"
+const helloMessage = new Message('Hello World!');
+	</code>
+</details>
+
+- always have a lexically bound `this` (we'll learn more about that later in the React unit).
 - cannot use `arguments` key word ([learn more about `arguments`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments))
 
+
+### You Try: Converting To Arrow Syntax
+
+Now it's your turn. Convert the function below to use arrow syntax.
+
+```javascript
+// Starting function
+const isEven = function (num) {
+  return num % 2 === 0;
+}
+
+console.log('Is 1 even?', isEven(1));
+console.log('Is 2 even?', isEven(2));
+
+// Rewrite the isEven function using arrow syntax in the space below.
+
+//Starting function
+function add (num1, num2) {
+  return num1 + num2;
+}
+
+console.log("What is 3 + 4?", add(3, 4));
+console.log("What is 7 + 5?", add(7, 5)); 
+
+// Rewrite the add function using arrow syntax in the space below. Try to write an implicit return! :) 
+
+```
 
 
 ### Functions as Values
@@ -221,7 +243,6 @@ let arr = [
 ];
 
 console.log(arr[1]());
-
 </code>
 
 </details>
