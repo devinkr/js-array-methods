@@ -540,12 +540,12 @@ const instructors = [
 	{
 		name: 'Carlos',
 		location: 'New Jersey',
-		likes: ['Python', 'teaching', 'web development']
+		likes: ['Python', 'Bitcoin', 'software engineering']
 	},
 	{
 		name: 'Esin',
 		location: 'Austin', 
-		likes: ['coffee', 'tacos', 'Star Trek']
+		likes: ['coffee', 'tacos', 'yoga']
 	}
 ]
 ```
