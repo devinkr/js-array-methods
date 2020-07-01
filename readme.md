@@ -1,21 +1,22 @@
-# Array Iteration Methods & Higher-Order Functions
+# Higher-Order Functions & Array Iteration Methods 
 
 ## Learning Objectives
 
 -   Define higher-order functions
+-   Convert function declarations to arrow functions
 -   Use higher-order functions to iterate over arrays
 -   Describe the uses of `forEach`, `map`, `filter`, and `reduce`
 
 ## Instructions
 Let's set up a simple development environment:
 
-1. Create a directory called js-higher-order-functions in your sandbox directory.
+1. Create a directory called js-array-methods in your sandbox directory.
 2. Inside of it create an index.html file and a script.js file.
 3. Add boilerplate to index.html, link the script, then add a console.log to the script to make sure everything is wired up properly.
 
 ## Framing & Review
 
-Today we will cover some array methods which are used to transform arrays. This
+Today we will cover some higher-order array iteration methods which are used to transform arrays. This
 could be as simple as multiplying each number in an array of numbers by a
 certain factor, or adding them all together to obtain their sum.
 
@@ -104,6 +105,95 @@ console.log('hello!');
 //// console.log() returns `undefined`, which appears below the console-logged message because the console.log() method is not given a RETURN VALUE
 ```
 
+#### How to Convert to Arrow Syntax
+
+We can convert an existing JavaScript function to use the arrow syntax with the
+ following steps.
+
+1. Remove the `function` keyword
+2. Add a fat arrow (`=>`) between the function parameters  `()` and the opening
+    brace `{`
+
+```js
+// Without arrow syntax
+const helloWorld = function () {
+  console.log('Hello World!')
+}
+
+// Using arrow syntax
+const helloWorld = () => {
+  console.log('Hello World!')
+}
+```
+
+##### Single Expression Implicit Return
+
+Arrow functions bodies that are a single expression have an added benefit, an
+implicit return.  This means that arrow function bodies without `{}` return the
+value of the expression without needing to use `return`.
+
+```js
+// Without arrow syntax
+const add = function (x, y) {
+  return x + y
+}
+
+// Using arrow syntax with an explicit return
+const add = (x, y) => {
+  return x + y
+}
+
+// Using arrow syntax with an implicit return
+const add = (x, y) => x + y
+```
+
+##### Single Parameter
+
+When using the arrow function syntax with a single parameter, then parenthesis
+ are not required.
+
+```js
+// Without arrow syntax
+const isPositive = function (num) {
+  return num > 0
+}
+
+// Using arrow syntax with an implicit return value
+const isPositive = (num) => num > 0
+
+// Parenthesis aren't required for a single parameter
+const isPositive = num => num > 0
+```
+
+### You Try: Converting To Arrow Syntax
+
+Now it's your turn. Convert the function below to use arrow syntax.
+
+```javascript
+// Starting function
+const isEven = function (num) {
+  return num % 2 === 0
+}
+
+console.log('Is 1 even?', isEven(1))
+console.log('Is 2 even?', isEven(2))
+
+// 1. Rewrite the isEven function using arrow syntax.
+```
+
+### Arrow Function Caveats
+
+Arrow Functions have a few caveats.
+
+Arrow functions:
+
+- **cannot** be used as a Constructor (`new` does not bind `this`, no
+  `prototype` property).
+- always have a lexically bound `this` (we'll learn more about that later).
+- cannot use `arguments` key word ([learn more about `arguments`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments))
+
+
+
 ### Functions as Values
 
 One of the things that makes JavaScript so powerful is that we can reference
@@ -114,9 +204,6 @@ The impact of this is we can:
 -   add functions to arrays and objects, just like any other value
 -   pass functions as arguments to another function
 -   return a function from a function
-
-> Open up a [Code Pen](https://codepen.io/pen/) and see for
-> yourself!
 
 > 1. Create an array and add a function to it in the first index. How do you
 >    invoke it?
@@ -586,6 +673,19 @@ const numEvens = [1, 2, 3, 4, 5, 6, 7].reduce((count, num) => {
 }, 0);
 ```
 
+We can even use `.reduce()` to iterate over an array of objects and generate a new object with counts of a property: 
+
+```javascript
+const letterCounts = "hello world".split("").reduce((runningCounts, letter) => {
+   if (runningCounts[letter]) {
+     runningCounts[letter]++;
+   } else {
+     runningCounts[letter] = 1;
+   }
+   return runningCounts;
+ }, {});
+```
+
 For a step by step of how the mechanics work, check out
 [this section on the MDN page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works).
 
@@ -624,7 +724,7 @@ of the compare function:
 
 ```js
 function compareNumbers(a, b) {
-	return a - b;
+   return a - b;
 }
 
 let array = [111, 2, 10, 20, 3, -1, 12];
@@ -653,3 +753,13 @@ most southern?
 -   [Node School Workshoppers](https://nodeschool.io/#workshoppers) (Functional
     JavaScript elective)
 -   [Eloquent JS Higher-Order Functions](http://eloquentjavascript.net/05_higher_order.html)
+
+### Even More Resources
+- [Array Iteration Method Practice Problems](extra-practice.md)
+- [Array Methods Explained: filter, map, reduce, & forEach](https://codeburst.io/array-methods-explained-filter-vs-map-vs-reduce-vs-foreach-ea3127c6d319)
+- [A Guide To The Reduce Method In Javascript​](https://medium.freecodecamp.org/reduce-f47a7da511a9)
+- [Array Method Explorer](https://sdras.github.io/array-explorer/)
+- [W3Schools Array Iteration Methods](https://www.w3schools.com/js/js_array_iteration.asp)
+- [How to use Array Iteration Methods | DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-use-array-methods-in-javascript-iteration-methods)
+- [:movie_camera: JavaScript Array Methods Playlist - The Coding Train](https://www.youtube.com/watch?v=H4awPsyugS0&list=PLRqwX-V7Uu6aAEUqu96Newc-7qpuh-cxc)
+- [:movie_camera: Array Iteration: Methods - freeCodeCamp](https://www.youtube.com/watch?v=Urwzk6ILvPQ)
