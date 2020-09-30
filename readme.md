@@ -6,6 +6,7 @@
 -   Convert function declarations to arrow functions
 -   Use higher-order functions to iterate over arrays
 -   Describe the uses of `forEach`, `map`, `filter`, and `reduce`
+-   Describe the uses of `every` and `some`
 
 ## Instructions
 Let's set up a simple development environment:
