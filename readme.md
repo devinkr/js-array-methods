@@ -532,9 +532,9 @@ Taking the array of instructor objects below, create map functions that do the f
 ```javascript
 const instructors = [
 	{
-		name: 'Hou',
-		location: 'New York City', 
-		likes: ['cats', 'coding', 'yoga']
+		name: 'Carlos',
+		location: 'New Jersey',
+		likes: ['Python', 'Bitcoin', 'software engineering']
 	}, 
 	{
 		name: 'Jennifer',
@@ -542,9 +542,9 @@ const instructors = [
 		likes: ['dogs', 'software development', 'piano']
 	}, 
 	{
-		name: 'Carlos',
-		location: 'New Jersey',
-		likes: ['Python', 'Bitcoin', 'software engineering']
+		name: 'Tabitha',
+		location: 'Boston',
+		likes: ['dogs', 'design', 'software engineering']
 	},
 	{
 		name: 'Esin',
