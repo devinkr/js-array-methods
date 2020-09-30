@@ -147,24 +147,6 @@ const add = (x, y) => {
 const add = (x, y) => x + y
 ```
 
-##### Single Parameter
-
-When using the arrow function syntax with a single parameter, then parenthesis
- are not required.
-
-```js
-// Without arrow syntax
-const isPositive = function (num) {
-  return num > 0
-}
-
-// Using arrow syntax with an implicit return value
-const isPositive = (num) => num > 0
-
-// Parenthesis aren't required for a single parameter
-const isPositive = num => num > 0
-```
-
 ### Arrow Function Caveats
 
 Arrow Functions have a few caveats.
@@ -571,7 +553,6 @@ const instructors = [
 ]
 ```
 - return an array called `greetings` that contains a personalized greeting: 'Hello `name`!'
-- return an array called `howDoYouLike` that asks how they like their location: 'How do you like `location`?'
 - return an array called `likeBetter` that asks which they like better, their first or second like: 'Do you like `first like` or `second like` better?
 
 **Challenge**: Can you use `.forEach()` to add a `greeting` property to each instructor object in the instructors array that greets them by their name? 
@@ -710,7 +691,7 @@ const letterCounts = "hello world".split("").reduce((runningCounts, letter) => {
 For a step by step of how the mechanics work, check out
 [this section on the MDN page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works).
 
-#### Bonus: Sort
+#### Sort
 
 The `sort` method is another higher-order function.
 
@@ -762,9 +743,48 @@ array.sort((a, b) => a - b);
 How would we write a compare function to sort our capitals from most northern to
 most southern?
 
+#### Some and Every
+
+Use `.every()` to see if every element in an array passes a given test. 
+
+```js
+const numbers = [
+	15,
+	18,
+	3921,
+	327,
+	88,
+	1235,
+	1,
+	55855,
+	34,
+	5,
+	9,
+	9019,
+	156,
+	874,
+	76,
+	444,
+	12346
+];
+
+const allOdd = numbers.every(num => num % 2); 
+// allOdd returns false
+
+```
+
+Use `.some()` to see if some elements in an array pass a given test.
+
+```
+const nachoIngredients = ['chips', 'salsa', 'guacamole', 'cheese', 'jalapenos', 'sour cream'];
+const containLetterC = nachoIngredients.some(ingredient => ingredient.includes('c'));
+// containLetterC returns true
+
+```
+
 ### Practice On Your Own:
 
--   Minions Callback Array Methods [Lab](https://git.generalassemb.ly/seir-323/callback-array-methods-lab)
+-   Minions Callback Array Methods [Lab](https://git.generalassemb.ly/sei-921/callback-array-methods-lab)
 
 -   Need a challenge? Try this [CodeWars](https://www.codewars.com/kata/coding-meetup-number-2-higher-order-functions-series-greet-developers) kata that covers array methods that use higher-order functions.
 
