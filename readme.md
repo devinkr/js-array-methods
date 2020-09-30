@@ -166,7 +166,7 @@ const helloMessage = new Message('Hello World!');
 	</code>
 </details>
 
-- always have a lexically bound `this` (we'll learn more about that later in the React unit).
+- always have a lexically bound `this` (we'll learn more about that later in the React unit, but check out this [article](https://www.freecodecamp.org/news/learn-es6-the-dope-way-part-ii-arrow-functions-and-the-this-keyword-381ac7a32881/#:~:text=While%20in%20ES5%20'this'%20referred,method%20or%20the%20object%20itself.) in the meantime).
 - cannot use `arguments` key word ([learn more about `arguments`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments))
 
 
