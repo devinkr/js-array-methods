@@ -217,14 +217,9 @@ const instructors = [
     likes: ['Python', 'Bitcoin', 'software engineering']
   }, 
   {
-    name: 'Jennifer',
-    location: 'Boston',
-    likes: ['dogs', 'software development', 'piano']
-  }, 
-  {
-    name: 'Tabitha',
-    location: 'Boston',
-    likes: ['dogs', 'design', 'software engineering']
+    name: 'Shaw',
+    location: 'San Diego',
+    likes: ['white peaches', 'running', 'software engineering']
   },
   {
     name: 'Esin',
@@ -307,6 +302,98 @@ Use either your `script.js` file you've been working in or open
 2. Filter all the states with capitals that start with the letter `A`.
 3. List all the states with two words in their name.
 
+
+## .some() and .every()
+
+Use `.every()` to see if every element in an array passes a given test. 
+
+```js
+const numbers = [
+	15,
+	18,
+	3921,
+	327,
+	88,
+	1235,
+	1,
+	55855,
+	34,
+	5,
+	9,
+	9019,
+	156,
+	874,
+	76,
+	444,
+	12346
+];
+
+const allOdd = numbers.every(num => num % 2); 
+// allOdd returns false
+
+```
+
+Use `.some()` to see if some elements in an array pass a given test.
+
+```
+const nachoIngredients = ['chips', 'salsa', 'guacamole', 'cheese', 'jalapenos', 'sour cream'];
+const containLetterC = nachoIngredients.some(ingredient => ingredient.includes('c'));
+// containLetterC returns true
+
+```
+
+## .sort()
+
+The `.sort()` method is another higher-order function.
+
+If no input function is supplied, values are sorted as strings by default.
+
+```js
+['chips', 'salsa', 'guacamole', 'cheese', 'jalapenos', 'sour cream'].sort();
+// => [ 'cheese', 'chips', 'guacamole', 'jalapenos', 'salsa', 'sour cream' ]
+```
+
+If the elements are not strings, it converts them to strings and sorts based on
+**unicode** values (alphabetized but with all uppercase characters before all
+lower case characters).
+
+This leads to the odd behavior of `10` being sorted in front of `2`...
+
+```js
+[111, 2, 10, 20, 3, -1, 12].sort();
+// => [-1, 10, 111, 12, 2, 20, 3]
+```
+
+To make the sort method work as expected, you can write a compare function. It
+takes two arguments `a` and `b`, which represent any two elements being sorted.
+
+Rather than returning `true` or `false` as in the case of the other test
+functions we've looked at, the elements are sorted according to the return value
+of the compare function:
+
+-   return a negative number if `a` should come before `b`
+-   return 0 if `a` and `b` are equal
+-   return a positive number if `a` should come after `b`
+
+```js
+function compareNumbers(a, b) {
+   return a - b;
+}
+
+let array = [111, 2, 10, 20, 3, -1, 12];
+
+// with a named function
+array.sort(compareNumbers);
+// => [-1, 1, 2, 3, 10, 12, 20]
+
+// with an anonymous function
+array.sort((a, b) => a - b);
+// => [-1, 1, 2, 3, 10, 12, 20]
+```
+
+How would we write a compare function to sort our capitals from most northern to
+most southern?
+
 ## .reduce()
 
 The most flexible array method function is called [`.reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Reduce, as the name
@@ -377,96 +464,8 @@ const letterCounts = "hello world".split("").reduce((runningCounts, letter) => {
 For a step by step of how the mechanics work, check out
 [this section on the MDN page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works).
 
-## .sort()
 
-The `.sort()` method is another higher-order function.
 
-If no input function is supplied, values are sorted as strings by default.
-
-```js
-['chips', 'salsa', 'guacamole', 'cheese', 'jalapenos', 'sour cream'].sort();
-// => [ 'cheese', 'chips', 'guacamole', 'jalapenos', 'salsa', 'sour cream' ]
-```
-
-If the elements are not strings, it converts them to strings and sorts based on
-**unicode** values (alphabetized but with all uppercase characters before all
-lower case characters).
-
-This leads to the odd behavior of `10` being sorted in front of `2`...
-
-```js
-[111, 2, 10, 20, 3, -1, 12].sort();
-// => [-1, 10, 111, 12, 2, 20, 3]
-```
-
-To make the sort method work as expected, you can write a compare function. It
-takes two arguments `a` and `b`, which represent any two elements being sorted.
-
-Rather than returning `true` or `false` as in the case of the other test
-functions we've looked at, the elements are sorted according to the return value
-of the compare function:
-
--   return a negative number if `a` should come before `b`
--   return 0 if `a` and `b` are equal
--   return a positive number if `a` should come after `b`
-
-```js
-function compareNumbers(a, b) {
-   return a - b;
-}
-
-let array = [111, 2, 10, 20, 3, -1, 12];
-
-// with a named function
-array.sort(compareNumbers);
-// => [-1, 1, 2, 3, 10, 12, 20]
-
-// with an anonymous function
-array.sort((a, b) => a - b);
-// => [-1, 1, 2, 3, 10, 12, 20]
-```
-
-How would we write a compare function to sort our capitals from most northern to
-most southern?
-
-## .some() and .every()
-
-Use `.every()` to see if every element in an array passes a given test. 
-
-```js
-const numbers = [
-	15,
-	18,
-	3921,
-	327,
-	88,
-	1235,
-	1,
-	55855,
-	34,
-	5,
-	9,
-	9019,
-	156,
-	874,
-	76,
-	444,
-	12346
-];
-
-const allOdd = numbers.every(num => num % 2); 
-// allOdd returns false
-
-```
-
-Use `.some()` to see if some elements in an array pass a given test.
-
-```
-const nachoIngredients = ['chips', 'salsa', 'guacamole', 'cheese', 'jalapenos', 'sour cream'];
-const containLetterC = nachoIngredients.some(ingredient => ingredient.includes('c'));
-// containLetterC returns true
-
-```
 
 ## Practice On Your Own:
 
