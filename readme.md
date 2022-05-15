@@ -5,7 +5,7 @@
 - Use higher-order functions/methods to iterate over arrays
 - Write callback functions to pass to our array iteration methods
 - Describe the uses of `forEach`, `map`, `filter`
-- Describe the uses of `every`, `some`, `sort`
+<!-- - Describe the uses of `every`, `some`, `sort` -->
 - Learn to use documentation for the array iteration methods
 
 ## Instructions
@@ -216,14 +216,14 @@ Taking the array of instructor objects below, create map functions that do the f
 ```javascript
 const instructors = [
 	{
-		name: 'Carlos',
-		location: 'New Jersey',
-		likes: ['Python', 'Bitcoin', 'software engineering'],
+		name: 'Zoe',
+		location: 'Denver',
+		likes: ['cycling', 'knitting', 'coding'],
 	},
 	{
-		name: 'Shaw',
-		location: 'San Diego',
-		likes: ['white peaches', 'running', 'software engineering'],
+		name: 'Tom',
+		location: 'Los Angeles',
+		likes: ['programming', 'cats', 'cool zoom backgrounds'],
 	},
 	{
 		name: 'Esin',
@@ -236,9 +236,9 @@ const instructors = [
 - return an array called `greetings` that contains a personalized greeting: 'Hello `name`!'
 - return an array called `likeBetter` that asks which they like better, their first or second like: 'Do you like `first like` or `second like` better?
 
-**Challenge**: Can you use `.forEach()` to add a `greeting` property to each instructor object in the instructors array that greets them by their name?
+**Challenge**: Can you use `.forEach()` to add a `greeting` property to each instructor object in the instructors array that greets them by their name? Hint: You'll probably need to create a side effect!
 
-## [.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+<!-- ## [.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
 
 Another common procedure is to filter elements from an array based on some
 custom condition.
@@ -450,10 +450,11 @@ const letterCounts = 'hello world'.split('').reduce((runningCounts, letter) => {
 
 For a step by step of how the mechanics work, check out
 [this section on the MDN page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works).
+ -->
 
 ## Phew, that was a lot!
 
-We covered some of the most commonly used array methods in class today, but there are more to learn, such as `findIndex`, `includes`, etc. That's why it's important to get comfortable reading documentation and figuring out how to use tools like Google and Stack Overflow to get the information that you need.
+We covered some of the most commonly used array methods in class today, but there are more to learn. That's why it's important to get comfortable reading documentation and figuring out how to use tools like Google and Stack Overflow to get the information that you need.
 
 When you can use the tools at your disposal to teach yourself, you have the meta-skills to learn any new language or framework -- the sky is the limit!
 
