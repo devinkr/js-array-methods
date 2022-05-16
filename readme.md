@@ -4,7 +4,7 @@
 
 - Use higher-order functions/methods to iterate over arrays
 - Write callback functions to pass to our array iteration methods
-- Describe the uses of `forEach`, `map`, `filter`
+- Describe the uses of `forEach` and `map`
 <!-- - Describe the uses of `every`, `some`, `sort` -->
 - Learn to use documentation for the array iteration methods
 
