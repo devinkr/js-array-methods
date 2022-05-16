@@ -5,7 +5,6 @@
 - Use higher-order functions/methods to iterate over arrays
 - Write callback functions to pass to our array iteration methods
 - Describe the uses of `forEach` and `map`
-<!-- - Describe the uses of `every`, `some`, `sort` -->
 - Learn to use documentation for the array iteration methods
 
 ## Instructions
@@ -63,12 +62,6 @@ arr.forEach(function (num) {
 });
 ```
 
-...and even more so if we convert this to the concise-body arrow syntax:
-
-```js
-arr.forEach((num) => console.log(num));
-```
-
 ### How it works:
 
 When using array iteration methods, we don't need to care about how many times the loop will run! The `.forEach()` runs the callback function exactly one time for each element in the array.
@@ -105,7 +98,7 @@ For example, this is an incorrect usage of `forEach`:
 ```js
 const letters = ['a', 'b', 'c'];
 
-const capLetters = letters.forEach((letter) => {
+const capLetters = letters.forEach(function (letter) {
 	return letter.toUpperCase(); //this return is pointless
 });
 
@@ -122,7 +115,7 @@ We _**can transform the values in the array in place though with `.forEach()`**_
 ```js
 const words = ['hello', 'this', 'is', 'fun'];
 
-words.forEach((word, index, arr) => {
+words.forEach(function (word, index, arr) {
 	arr[index] = word.toUpperCase();
 });
 
@@ -136,7 +129,7 @@ const words = ['hello', 'this', 'is', 'fun'];
 
 const newWords = [];
 
-words.forEach((word) => {
+words.forEach(function (word) {
 	const uppercased = word.toUpperCase();
 	newWords.push(uppercased);
 });
@@ -152,7 +145,9 @@ If we want to leave the original array unchanged there's a much cleaner to do th
 With `.forEach()`, we can modify the existing array. However, if we don't want to modify the existing array, and instead we want to produce a **new array of the same size** containing the transformed value, then `.map()` is the way to go.
 
 The `.map()` is a closely related sibling to `.forEach()`. The only difference
-between the useage of the two is that you **must always return something from map**.
+between the useage of the two is that you **must always return something from map**. 
+
+Without an explicit `return` in your callback function, an array created with `.map` will be an array of `undefined` values. 
 
 Using the same `words` array from before, let's do the same transformation (by
 capitalizing each word). Only this time, we'll do it better.
@@ -171,20 +166,15 @@ console.log(uppercaseWords);
 // [ 'HELLO', 'THIS', 'IS', 'FUN' ]
 ```
 
-Lovely! So let's refactor it now using an arrow function and moving
-the logic all into one line.
+Lovely! So let's refactor it now using an anonymous function.
 
 ```js
-// STEP 1: Convert it to an arrow function
-const uppercaseWords = words.map((word) => {
+const uppercaseWords = words.map(function (word) {
 	return word.toUpperCase();
 });
 ```
 
-```js
-// STEP 2: Use the implied return to make it one line!
-const uppercaseWords = words.map((word) => word.toUpperCase());
-```
+
 
 ### How it works:
 
